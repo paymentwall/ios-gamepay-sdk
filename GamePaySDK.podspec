@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                = 'GamePaySDK'
-  # s.version             = '1.0.0'
+  s.version             = '0.0.0'
   s.homepage            = 'https://terminal3.com'
   s.documentation_url   = 'https://docs.terminal3.com/'
   s.license             = { :type => 'Commercial' }
