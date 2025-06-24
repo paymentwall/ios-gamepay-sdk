@@ -1,0 +1,592 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name GamePaySDK
+import CryptoKit
+import DeveloperToolsSupport
+import Foundation
+@_exported import GamePaySDK
+import SafariServices
+import Security
+import Swift
+import SwiftUI
+import UIKit
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public typealias APICompletionHandler<T> = (Swift.Result<T, GamePaySDK.GPAPIClientError>) -> Swift.Void where T : Swift.Decodable
+public struct GPAPIClientError : Swift.Decodable, Swift.Error {
+  public let code: Swift.Int
+  public let error: Swift.String
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension Foundation.Bundle {
+  @_spi(STP) public class func stp_applicationName() -> Swift.String?
+  @_spi(STP) public class func stp_applicationVersion() -> Swift.String?
+  @_spi(STP) public class func stp_applicationBundleId() -> Swift.String?
+  @_spi(STP) public class func buildVersion() -> Swift.String?
+  @_spi(STP) public class var displayName: Swift.String? {
+    get
+  }
+}
+public struct URLCallBackCoordinator {
+  public static func canHandleReturnURL(_ url: Swift.String) -> Swift.Bool
+  public static func handleReturnURL(_ url: Swift.String) -> Swift.Bool
+}
+extension Swift.String {
+  public func toDate(format: Swift.String, locale: Foundation.Locale = .current, timeZone: Foundation.TimeZone? = .current, calendar: Foundation.Calendar = Calendar(identifier: .gregorian)) -> Foundation.Date?
+}
+extension Foundation.Date {
+  public func get(_ components: Foundation.Calendar.Component..., calendar: Foundation.Calendar = Calendar.current) -> Foundation.DateComponents
+  public func get(_ component: Foundation.Calendar.Component, calendar: Foundation.Calendar = Calendar.current) -> Swift.Int
+}
+extension Foundation.URL {
+  public var queryParameters: [Swift.String : Swift.String]? {
+    get
+  }
+}
+extension UIKit.UIViewController {
+  @_Concurrency.MainActor @preconcurrency public func showAlert(title: Swift.String?, message: Swift.String, okButtonTitle: Swift.String, okButtonHandler: ((UIKit.UIAlertAction) -> Swift.Void)?, cancelButtonTitle: Swift.String, cancelButtonHandler: ((UIKit.UIAlertAction) -> Swift.Void)?)
+  @_Concurrency.MainActor @preconcurrency public func showAlert(title: Swift.String?, message: Swift.String, actionTitle: Swift.String = "OK", completeHandler: ((UIKit.UIAlertAction) -> Swift.Void)?)
+}
+public protocol FormViewValidatable {
+  var validator: GamePaySDK.Validator { get }
+  var allValidatableFields: [any GamePaySDK.ErrorMessageProvider] { get }
+}
+public protocol ErrorMessageProvider {
+  func showError(message: Swift.String?)
+  func hideError()
+}
+extension GamePaySDK.FormViewValidatable where Self : UIKit.UIViewController {
+  public func showValidationErrors(_ errors: [(any GamePaySDK.Validatable, GamePaySDK.ValidationError)], animated: Swift.Bool = true)
+  public func hideValidationErrors(animated: Swift.Bool = true)
+}
+extension GamePaySDK.FormViewValidatable where Self : UIKit.UIView {
+  public func showValidationErrors(_ errors: [(any GamePaySDK.Validatable, GamePaySDK.ValidationError)], animated: Swift.Bool = true)
+  public func hideValidationErrors(animated: Swift.Bool = true)
+}
+public typealias ValidatableField = Swift.AnyObject & GamePaySDK.Validatable
+public protocol Validatable {
+  var validationText: Swift.String { get }
+}
+extension UIKit.UITextField : GamePaySDK.Validatable {
+  @_Concurrency.MainActor @preconcurrency public var validationText: Swift.String {
+    get
+  }
+}
+extension UIKit.UITextView : GamePaySDK.Validatable {
+  @_Concurrency.MainActor @preconcurrency public var validationText: Swift.String {
+    get
+  }
+}
+public protocol ValidationDelegate {
+  func validationSuccessful()
+  func validationFailed(_ errors: [(any GamePaySDK.Validatable, GamePaySDK.ValidationError)])
+}
+@objc public class ValidationError : ObjectiveC.NSObject {
+  final public let field: any Swift.AnyObject & GamePaySDK.Validatable
+  public var errorLabel: UIKit.UILabel?
+  final public let errorMessage: Swift.String
+  public init(field: any Swift.AnyObject & GamePaySDK.Validatable, errorLabel: UIKit.UILabel?, error: Swift.String)
+  @objc deinit
+}
+public class Validator {
+  public var validations: GamePaySDK.ValidatorDictionary<GamePaySDK.ValidationRule>
+  public var errors: GamePaySDK.ValidatorDictionary<GamePaySDK.ValidationError>
+  public init()
+  public func validateField(_ field: any Swift.AnyObject & GamePaySDK.Validatable, callback: (_ error: GamePaySDK.ValidationError?) -> Swift.Void)
+  public func styleTransformers(success: ((_ validationRule: GamePaySDK.ValidationRule) -> Swift.Void)?, error: ((_ validationError: GamePaySDK.ValidationError) -> Swift.Void)?)
+  public func registerField(_ field: any Swift.AnyObject & GamePaySDK.Validatable, errorLabel: UIKit.UILabel? = nil, rules: [any GamePaySDK.Rule])
+  public func unregisterField(_ field: any Swift.AnyObject & GamePaySDK.Validatable)
+  public func validate(_ delegate: any GamePaySDK.ValidationDelegate)
+  public func validate(_ callback: (_ errors: [(any GamePaySDK.Validatable, GamePaySDK.ValidationError)]) -> Swift.Void)
+  @objc deinit
+}
+public struct ValidatorDictionary<T> : Swift.Sequence {
+  public subscript(key: (any Swift.AnyObject & GamePaySDK.Validatable)?) -> T? {
+    get
+    set(newValue)
+  }
+  public mutating func removeAll()
+  public mutating func removeValueForKey(_ key: any Swift.AnyObject & GamePaySDK.Validatable)
+  public var isEmpty: Swift.Bool {
+    get
+  }
+  public func makeIterator() -> Swift.DictionaryIterator<Swift.ObjectIdentifier, T>
+  public typealias Element = Swift.Dictionary<Swift.ObjectIdentifier, T>.Iterator.Element
+  public typealias Iterator = Swift.DictionaryIterator<Swift.ObjectIdentifier, T>
+}
+@_inheritsConvenienceInitializers public class OnlyLetterRule : GamePaySDK.RegexRule {
+  convenience public init(message: Swift.String = "This field can only contain letters and numbers.")
+  override public init(regex: Swift.String, message: Swift.String = super)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class LetterAndNumberRule : GamePaySDK.RegexRule {
+  convenience public init(message: Swift.String = "This field can only contain letters and numbers.")
+  override public init(regex: Swift.String, message: Swift.String = super)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class LetterNumberAndSpaceRule : GamePaySDK.RegexRule {
+  convenience public init(message: Swift.String = "This field can only contain letters and numbers.")
+  override public init(regex: Swift.String, message: Swift.String = super)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class IBANLetterAndNumberRule : GamePaySDK.RegexRule {
+  convenience public init(message: Swift.String = "IBAN Invalid Format")
+  override public init(regex: Swift.String, message: Swift.String = super)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers final public class UsernameRule : GamePaySDK.RegexRule {
+  convenience public init(message: Swift.String = "Username Invalid Format")
+  override public init(regex: Swift.String, message: Swift.String = super)
+  @objc deinit
+}
+final public class UsernameLengthRule : GamePaySDK.Rule {
+  public init()
+  final public func validate(_ value: Swift.String) -> Swift.Bool
+  final public func errorMessage() -> Swift.String
+  @objc deinit
+}
+@_inheritsConvenienceInitializers final public class UsernameFirstLetterRule : GamePaySDK.RegexRule {
+  convenience public init(message: Swift.String = "Username Invalid Format")
+  override public init(regex: Swift.String, message: Swift.String = super)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers final public class ExistUsernameRule : GamePaySDK.RegexRule {
+  convenience public init(currentName: Swift.String, message: Swift.String = "User is taken.")
+  override public init(regex: Swift.String, message: Swift.String = super)
+  @objc deinit
+}
+public class CardExpiryMonthRule : GamePaySDK.Rule {
+  public init(message: Swift.String = "Must be a valid calendar month")
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+public class CardExpiryYearRule : GamePaySDK.Rule {
+  public init(message: Swift.String = "Must be within 3 years of validity")
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+public class ConfirmationRule : GamePaySDK.Rule {
+  public init(confirmField: any Swift.AnyObject & GamePaySDK.Validatable, message: Swift.String = "This field does not match")
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class EmailRule : GamePaySDK.RegexRule {
+  convenience public init(message: Swift.String = "Please enter a valid email address")
+  override public init(regex: Swift.String, message: Swift.String = super)
+  @objc deinit
+}
+public class ExactLengthRule : GamePaySDK.Rule {
+  public init(length: Swift.Int, message: Swift.String = "Must be exactly %ld characters long")
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+public class FullNameRule : GamePaySDK.Rule {
+  public init(message: Swift.String = "Please provide a first & last name")
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+public class MaxLengthRule : GamePaySDK.Rule {
+  public init()
+  public init(length: Swift.Int, message: Swift.String = "Must be at most %ld characters long")
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+public class MinLengthRule : GamePaySDK.Rule {
+  public init()
+  public init(length: Swift.Int, message: Swift.String = "Must be at least %ld characters long")
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class PasswordRule : GamePaySDK.RegexRule {
+  convenience public init(message: Swift.String = "Must be 8 characters with 1 uppercase")
+  override public init(regex: Swift.String, message: Swift.String = super)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class PhoneNumberRule : GamePaySDK.RegexRule {
+  convenience public init(message: Swift.String = "Enter a valid 10 digit phone number")
+  override public init(regex: Swift.String, message: Swift.String = super)
+  @objc deinit
+}
+open class RegexRule : GamePaySDK.Rule {
+  public init(regex: Swift.String, message: Swift.String = "Invalid Regular Expression")
+  open func validate(_ value: Swift.String) -> Swift.Bool
+  open func errorMessage() -> Swift.String
+  @objc deinit
+}
+open class RequiredRule : GamePaySDK.Rule {
+  public init(message: Swift.String = "This field is required")
+  open func validate(_ value: Swift.String) -> Swift.Bool
+  open func errorMessage() -> Swift.String
+  @objc deinit
+}
+public protocol Rule {
+  func validate(_ value: Swift.String) -> Swift.Bool
+  func errorMessage() -> Swift.String
+}
+public class ValidationRule {
+  public var field: any Swift.AnyObject & GamePaySDK.Validatable
+  public var errorLabel: UIKit.UILabel?
+  public var rules: [any GamePaySDK.Rule]
+  public init(field: any Swift.AnyObject & GamePaySDK.Validatable, rules: [any GamePaySDK.Rule], errorLabel: UIKit.UILabel?)
+  public func validateField() -> GamePaySDK.ValidationError?
+  @objc deinit
+}
+public protocol KeychainManageable {
+  associatedtype T : Swift.Decodable, Swift.Encodable
+  var service: Swift.String { get }
+  var account: Swift.String { get }
+  @discardableResult
+  func save(data: Self.T) -> Swift.Bool
+  func retrieve() -> Self.T?
+  @discardableResult
+  func delete() -> Swift.Bool
+}
+extension GamePaySDK.KeychainManageable {
+  @discardableResult
+  public func save(data: Self.T) -> Swift.Bool
+  public func retrieve() -> Self.T?
+  @discardableResult
+  public func delete() -> Swift.Bool
+}
+public struct BrickStoredCardKeychainManager : GamePaySDK.KeychainManageable {
+  public typealias T = [GamePaySDK.BrickCard]
+  public let service: Swift.String
+  public let account: Swift.String
+  public init(userId: Swift.String)
+}
+public class LinkOutPaymentHandler {
+  public struct WidgetSetting {
+    public init(projectKey: Swift.String, secretKey: Swift.String, userId: Swift.String, successUrl: Swift.String, amount: Swift.Double, currencyCode: Swift.String, externalID: Swift.String, countryCode: Swift.String?)
+  }
+  public init(with setting: GamePaySDK.LinkOutPaymentHandler.WidgetSetting, extraParams: [Swift.String : Any] = [:], environment: GamePaySDK.PaymentSheet.Environment = .production)
+  public func start(successHandler: @escaping () -> Swift.Void)
+  public func getPaymentStatus(completionHandler: @escaping ([GamePaySDK.WidgetPayment]) -> Swift.Void)
+  @objc deinit
+}
+public struct BrickCard : Swift.Codable, Swift.Equatable, Swift.Hashable {
+  public let expireMonth: Swift.String
+  public let expireYear: Swift.String
+  public let lastFour: Swift.String
+  public let token: Swift.String
+  public let type: Swift.String
+  public let country: Swift.String
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+  public static func == (a: GamePaySDK.BrickCard, b: GamePaySDK.BrickCard) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct BrickCharge : Swift.Codable {
+  public enum Risk : Swift.String, Swift.Codable {
+    case approved, pending
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public let amount: Swift.String
+  public let amountPaid: Swift.String?
+  public let currency: Swift.String
+  public let id: Swift.String
+  public let card: GamePaySDK.BrickCard
+  public let risk: GamePaySDK.BrickCharge.Risk?
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct BrickOTTResponse : Swift.Codable {
+  public let token: Swift.String
+  public var email: Swift.String?
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@_hasMissingDesignatedInitializers public class BrickPaymentOption : GamePaySDK.PaymentOption {
+  public init()
+  @objc deinit
+}
+public struct PayAltoMethodResponse : Swift.Codable {
+  public let id: Swift.String
+  public let name: Swift.String
+  public let imgUrl: Swift.String
+  public let psTypeId: Swift.Int
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class PayAltoPaymentOption : GamePaySDK.PaymentOption {
+  public var psId: Swift.String
+  public var psTypeId: Swift.Int
+  public var setting: GamePaySDK.PayAltoPaymentOption.Setting
+  public init()
+  public struct Setting {
+    public var widget: Swift.String
+    public var successUrl: Swift.String
+    public var clientUrl: Swift.String
+    public var countryCode: Swift.String?
+    public init()
+  }
+  @objc deinit
+}
+public struct PaymentObject {
+  public let itemID: Swift.String
+  public let userID: Swift.String
+  public let name: Swift.String
+  public let price: Swift.Double
+  public let currency: Swift.String
+  public let image: UIKit.UIImage?
+  public init(itemID: Swift.String, userID: Swift.String, name: Swift.String, price: Swift.Double, currency: Swift.String, image: UIKit.UIImage?)
+}
+@_hasMissingDesignatedInitializers public class PaymentOption {
+  public func setKeys(projectKey: Swift.String? = nil, secretKey: Swift.String? = nil)
+  @objc deinit
+}
+public struct WidgetPayment : Swift.Decodable {
+  public let id: Swift.String
+  public let amount: Swift.String
+  public let currency: Swift.String
+  public let userId: Swift.String
+  public let paymentSystem: Swift.String
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_spi(STP) @objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class DynamicHeightContainerView : UIKit.UIView {
+  @_spi(STP) @frozen public enum PinnedDirection {
+    @_spi(STP) case top, bottom
+    @_spi(STP) public static func == (a: GamePaySDK.DynamicHeightContainerView.PinnedDirection, b: GamePaySDK.DynamicHeightContainerView.PinnedDirection) -> Swift.Bool
+    @_spi(STP) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(STP) public var hashValue: Swift.Int {
+      @_spi(STP) get
+    }
+  }
+  @_spi(STP) @_Concurrency.MainActor @preconcurrency required public init(pinnedDirection: GamePaySDK.DynamicHeightContainerView.PinnedDirection = .bottom)
+  @_spi(STP) @_Concurrency.MainActor @preconcurrency public func addPinnedSubview(_ view: UIKit.UIView)
+  @_spi(STP) @_Concurrency.MainActor @preconcurrency public func updateHeight()
+  @_spi(STP) @objc deinit
+}
+public class PaymentSheet {
+  public var configuration: GamePaySDK.PaymentSheet.Configuration
+  public var payment: GamePaySDK.PaymentObject
+  required public init(payment: GamePaySDK.PaymentObject, configuration: GamePaySDK.PaymentSheet.Configuration)
+  public func present(from presentingViewController: UIKit.UIViewController, delegate: (any GamePaySDK.PaymentSheetDelegate)? = nil)
+  @objc deinit
+}
+extension GamePaySDK.PaymentSheet {
+  public struct Appearance : Swift.Equatable {
+    public static let `default`: GamePaySDK.PaymentSheet.Appearance
+    public init()
+    public var font: GamePaySDK.PaymentSheet.Appearance.Font
+    public var colors: GamePaySDK.PaymentSheet.Appearance.Colors
+    public var primaryButton: GamePaySDK.PaymentSheet.Appearance.PrimaryButton
+    public var cornerRadius: CoreFoundation.CGFloat
+    public var borderWidth: CoreFoundation.CGFloat
+    public var selectedBorderWidth: CoreFoundation.CGFloat?
+    public var shadow: GamePaySDK.PaymentSheet.Appearance.Shadow
+    public var embeddedPaymentElement: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement
+    @_spi(AppearanceAPIAdditionsPreview) public var sheetCornerRadius: CoreFoundation.CGFloat
+    public var formInsets: UIKit.NSDirectionalEdgeInsets
+    @_spi(AppearanceAPIAdditionsPreview) public var sectionSpacing: CoreFoundation.CGFloat
+    public struct Font : Swift.Equatable {
+      public init()
+      public var sizeScaleFactor: CoreFoundation.CGFloat {
+        get
+        set
+      }
+      public var base: UIKit.UIFont
+      @_spi(AppearanceAPIAdditionsPreview) public var custom: GamePaySDK.PaymentSheet.Appearance.Font.Custom
+      @_spi(AppearanceAPIAdditionsPreview) public struct Custom : Swift.Equatable {
+        @_spi(AppearanceAPIAdditionsPreview) public init()
+        @_spi(AppearanceAPIAdditionsPreview) public var headline: UIKit.UIFont?
+        @_spi(AppearanceAPIAdditionsPreview) public static func == (a: GamePaySDK.PaymentSheet.Appearance.Font.Custom, b: GamePaySDK.PaymentSheet.Appearance.Font.Custom) -> Swift.Bool
+      }
+      public static func == (a: GamePaySDK.PaymentSheet.Appearance.Font, b: GamePaySDK.PaymentSheet.Appearance.Font) -> Swift.Bool
+    }
+    public struct Colors : Swift.Equatable {
+      public init()
+      public var primary: UIKit.UIColor
+      public var background: UIKit.UIColor
+      public var componentBackground: UIKit.UIColor
+      public var componentBorder: UIKit.UIColor
+      public var selectedComponentBorder: UIKit.UIColor?
+      public var componentDivider: UIKit.UIColor
+      public var text: UIKit.UIColor
+      public var textSecondary: UIKit.UIColor
+      public var componentText: UIKit.UIColor
+      public var componentPlaceholderText: UIKit.UIColor
+      public var icon: UIKit.UIColor
+      public var danger: UIKit.UIColor
+      public static func == (a: GamePaySDK.PaymentSheet.Appearance.Colors, b: GamePaySDK.PaymentSheet.Appearance.Colors) -> Swift.Bool
+    }
+    public struct Shadow : Swift.Equatable {
+      public static var disabled: GamePaySDK.PaymentSheet.Appearance.Shadow {
+        get
+      }
+      public var color: UIKit.UIColor
+      public var opacity: CoreFoundation.CGFloat
+      public var offset: CoreFoundation.CGSize
+      public var radius: CoreFoundation.CGFloat
+      public init()
+      public init(color: UIKit.UIColor, opacity: CoreFoundation.CGFloat, offset: CoreFoundation.CGSize, radius: CoreFoundation.CGFloat)
+      public static func == (a: GamePaySDK.PaymentSheet.Appearance.Shadow, b: GamePaySDK.PaymentSheet.Appearance.Shadow) -> Swift.Bool
+    }
+    public struct PrimaryButton : Swift.Equatable {
+      public init()
+      public var backgroundColor: UIKit.UIColor?
+      public var textColor: UIKit.UIColor?
+      public var loadingColor: UIKit.UIColor
+      public var disabledBackgroundColor: UIKit.UIColor?
+      public var disabledTextColor: UIKit.UIColor?
+      public var successBackgroundColor: UIKit.UIColor
+      public var successTextColor: UIKit.UIColor?
+      public var cornerRadius: CoreFoundation.CGFloat?
+      public var borderColor: UIKit.UIColor
+      public var borderWidth: CoreFoundation.CGFloat
+      public var font: UIKit.UIFont?
+      public var shadow: GamePaySDK.PaymentSheet.Appearance.Shadow?
+      public var height: CoreFoundation.CGFloat {
+        get
+        set
+      }
+      public static func == (a: GamePaySDK.PaymentSheet.Appearance.PrimaryButton, b: GamePaySDK.PaymentSheet.Appearance.PrimaryButton) -> Swift.Bool
+    }
+    public static func == (a: GamePaySDK.PaymentSheet.Appearance, b: GamePaySDK.PaymentSheet.Appearance) -> Swift.Bool
+  }
+}
+extension GamePaySDK.PaymentSheet.Appearance {
+  public struct EmbeddedPaymentElement : Swift.Equatable {
+    public init()
+    public var row: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row
+    public struct Row : Swift.Equatable {
+      public enum Style : Swift.CaseIterable {
+        case flatWithRadio
+        case floatingButton
+        case flatWithCheckmark
+        public static func == (a: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style, b: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style) -> Swift.Bool
+        public func hash(into hasher: inout Swift.Hasher)
+        public typealias AllCases = [GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style]
+        nonisolated public static var allCases: [GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style] {
+          get
+        }
+        public var hashValue: Swift.Int {
+          get
+        }
+      }
+      public var style: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style
+      public var additionalInsets: CoreFoundation.CGFloat
+      public var flat: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Flat
+      public var floating: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Floating
+      public struct Flat : Swift.Equatable {
+        public var separatorThickness: CoreFoundation.CGFloat
+        public var separatorColor: UIKit.UIColor?
+        public var separatorInsets: UIKit.UIEdgeInsets?
+        public var topSeparatorEnabled: Swift.Bool
+        public var bottomSeparatorEnabled: Swift.Bool
+        public var radio: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Flat.Radio
+        public var checkmark: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Flat.Checkmark
+        public struct Radio : Swift.Equatable {
+          public var selectedColor: UIKit.UIColor?
+          public var unselectedColor: UIKit.UIColor?
+          public static func == (a: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Flat.Radio, b: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Flat.Radio) -> Swift.Bool
+        }
+        public struct Checkmark : Swift.Equatable {
+          public var color: UIKit.UIColor?
+          public static func == (a: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Flat.Checkmark, b: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Flat.Checkmark) -> Swift.Bool
+        }
+        public static func == (a: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Flat, b: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Flat) -> Swift.Bool
+      }
+      public struct Floating : Swift.Equatable {
+        public var spacing: CoreFoundation.CGFloat
+        public static func == (a: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Floating, b: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Floating) -> Swift.Bool
+      }
+      public static func == (a: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row, b: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row) -> Swift.Bool
+    }
+    public static func == (a: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement, b: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement) -> Swift.Bool
+  }
+}
+extension GamePaySDK.PaymentSheet {
+  public class Configuration {
+    public var paymentOptions: [GamePaySDK.PaymentOption]
+    public var merchantDisplayName: Swift.String
+    public var merchantTermsOfServiceURL: Swift.String?
+    public var merchantPrivacyPolicyURL: Swift.String?
+    public var appearance: GamePaySDK.PaymentSheet.Appearance
+    public var style: GamePaySDK.PaymentSheet.UserInterfaceStyle {
+      get
+      set
+    }
+    public var environment: GamePaySDK.PaymentSheet.Environment
+    public var projectKey: Swift.String?
+    public var secretKey: Swift.String?
+    public init(paymentOptions: [GamePaySDK.PaymentOption])
+    public func setKeys(projectKey: Swift.String? = nil, secretKey: Swift.String? = nil)
+    @objc deinit
+  }
+}
+extension GamePaySDK.PaymentSheet {
+  public enum Environment {
+    case staging, sandbox, production
+    public static func == (a: GamePaySDK.PaymentSheet.Environment, b: GamePaySDK.PaymentSheet.Environment) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+extension GamePaySDK.PaymentSheet {
+  public enum UserInterfaceStyle : Swift.Int {
+    case automatic
+    case alwaysLight
+    case alwaysDark
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+}
+public protocol PaymentSheetDelegate : AnyObject {
+  func handlePaymentResult(_ result: GamePaySDK.PaymentSheetResult)
+  func handleChargeRequest(token: GamePaySDK.BrickOTTResponse, payment: GamePaySDK.PaymentObject, completionHandler: @escaping (Foundation.Data) -> Swift.Void)
+}
+public struct PaymentSheetResult {
+  public enum Status {
+    case completed
+    case pending
+    case canceled
+    case failed
+    public static func == (a: GamePaySDK.PaymentSheetResult.Status, b: GamePaySDK.PaymentSheetResult.Status) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var status: GamePaySDK.PaymentSheetResult.Status
+  public var payment: GamePaySDK.PaymentObject?
+  public var brickCharge: GamePaySDK.BrickCharge?
+  public var error: (any Swift.Error)?
+  public init(status: GamePaySDK.PaymentSheetResult.Status)
+}
+extension GamePaySDK.BrickCharge.Risk : Swift.Equatable {}
+extension GamePaySDK.BrickCharge.Risk : Swift.Hashable {}
+extension GamePaySDK.BrickCharge.Risk : Swift.RawRepresentable {}
+@_spi(STP) extension GamePaySDK.DynamicHeightContainerView.PinnedDirection : Swift.Equatable {}
+@_spi(STP) extension GamePaySDK.DynamicHeightContainerView.PinnedDirection : Swift.Hashable {}
+@_spi(STP) extension GamePaySDK.DynamicHeightContainerView.PinnedDirection : Swift.Sendable {}
+@_spi(STP) extension GamePaySDK.DynamicHeightContainerView.PinnedDirection : Swift.BitwiseCopyable {}
+extension GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style : Swift.Equatable {}
+extension GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style : Swift.Hashable {}
+extension GamePaySDK.PaymentSheet.Environment : Swift.Equatable {}
+extension GamePaySDK.PaymentSheet.Environment : Swift.Hashable {}
+extension GamePaySDK.PaymentSheet.UserInterfaceStyle : Swift.Equatable {}
+extension GamePaySDK.PaymentSheet.UserInterfaceStyle : Swift.Hashable {}
+extension GamePaySDK.PaymentSheet.UserInterfaceStyle : Swift.RawRepresentable {}
+extension GamePaySDK.PaymentSheetResult.Status : Swift.Equatable {}
+extension GamePaySDK.PaymentSheetResult.Status : Swift.Hashable {}

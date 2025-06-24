@@ -1,0 +1,6 @@
+framework module GamePaySDK {
+  umbrella header "GamePaySDK.h"
+  export *
+
+  module * { export * }
+}
