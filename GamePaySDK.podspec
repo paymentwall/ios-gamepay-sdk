@@ -15,6 +15,6 @@ Pod::Spec.new do |s|
   s.swift_version       = '5.0'
   s.module_name         = 'GamePaySDK'
 
-  s.preserve_paths      = 'GamePaySDK.xcframework'
-  s.vendored_frameworks = 'GamePaySDK.xcframework'
+  s.preserve_paths      = 'GamePaySDK/GamePaySDK.xcframework'
+  s.vendored_frameworks = 'GamePaySDK/GamePaySDK.xcframework'
 end
