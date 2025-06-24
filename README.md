@@ -6,7 +6,7 @@
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [How to run Demo app](#how-to-run-demo-app)
-- [Lastest update](#lastest-update)
+- [Latest update](#latest-update)
 - [Credentials](#credentials)
 - [Core SDK integration](#core-sdk-integration)
 
