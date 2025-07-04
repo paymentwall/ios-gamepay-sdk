@@ -33,7 +33,10 @@ class PaymentSheetExampleViewController: UIViewController {
         let paymentOptions: [PaymentOption] = [brickOption, payAltoOption]
         let configuration = PaymentSheet.Configuration(paymentOptions: paymentOptions)
         configuration.merchantDisplayName = "Demo Merchant"
+        configuration.merchantTermsOfServiceURL = "https://fasterpay.com/terms-of-service"
+        configuration.merchantPrivacyPolicyURL = "https://fasterpay.com/privacy-policy"
         configuration.environment = .production
+        
         let payment = PaymentObject(
             itemID: UUID().uuidString,
             userID: "test-user-id",

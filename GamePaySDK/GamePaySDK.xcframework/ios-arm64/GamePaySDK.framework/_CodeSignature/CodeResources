@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		+gQQtvWsZ1v7xOYj2S2n9cDgJMI=
+		NqPJXjClxEOwj4MY8wI70LG0alk=
 		</data>
 		<key>Headers/GamePaySDK.h</key>
 		<data>
@@ -18,23 +18,23 @@
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		NCIKzeHdimdrPOraD30B4tiiUcU=
+		tTf3AtdSIWVssd9j2qo/NTtK56s=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		YQcnXIFfNdHesM2QcdXasyEDLk4=
+		9d8cBUGc3xyv4BfX4YHt0CrH1ps=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		zFVxzBTn2UFTiBchKCTaptRF7c0=
+		POj1TnMkwPrQj4zHFGPa5qGb164=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		xWERfiQ5Gjrk7uIg6bxDaR+myuo=
+		/Fyg0gfDxkkpLItsJk+rjP8GBDg=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		wH6zvX9IUT1Cb61ms7XNSx6uVFA=
+		grZGNtuXhHW1QDjVUsgU2WayUuU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -47,7 +47,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			UTL4WQUOLj6KdzUGRdJFybLhKQ2JELwhKX/PM2b1GmI=
+			XSCkPHj5qitv7a6ooXyr1UFBZul/ihE+LHGsO4s2f4U=
 			</data>
 		</dict>
 		<key>Headers/GamePaySDK.h</key>
@@ -61,35 +61,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			yw+uY7volJo+ymkNbZTGl3Bw+UMqO52d6r+YWqECqaI=
+			pGFK6RxiIaB4+Qj2XMutAz9ekHAxQexxJ15roedYZ00=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			IlDSEkgnodu3AWvchgUTtzfYZid5iscRHuOBhrlbrmE=
+			0sDboIord3QUj8El0B5TfNMwrjsxkp3Xv0bFgRrOfus=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			c6RVnRLVcJJOqvzouqLRwin8GaZP2hW/ZBD3L65dP3I=
+			LXSXM2VM8QfpKIpcwkAGc3ESnW8LCtagdiHeXCJxE5s=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			w7quIzoP58xT9ufT9e4ufrQ4ii+a3BiESnmjdXT9lRo=
+			EmEV4BeKYX8vrJdnlKEziwunZPlCBA/6HNzdlJPRt88=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ia4cJUgewst5kbcy5XDME0JyLfvrGFCnoBehBR3HBQM=
+			Kux4DllW38IyjpvilzN62rlFeSwB3wiuk0emp1G2vX0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

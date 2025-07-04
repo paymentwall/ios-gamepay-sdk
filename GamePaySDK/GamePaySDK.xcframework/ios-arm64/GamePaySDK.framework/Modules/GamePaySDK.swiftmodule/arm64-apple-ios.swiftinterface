@@ -5,6 +5,7 @@ import CryptoKit
 import DeveloperToolsSupport
 import Foundation
 @_exported import GamePaySDK
+import Photos
 import SafariServices
 import Security
 import Swift
@@ -15,6 +16,8 @@ import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
 public typealias APICompletionHandler<T> = (Swift.Result<T, GamePaySDK.GPAPIClientError>) -> Swift.Void where T : Swift.Decodable
+public typealias HTTPHeaders = [Swift.String : Swift.String]
+public typealias Parameters = [Swift.String : Any]
 public struct GPAPIClientError : Swift.Decodable, Swift.Error {
   public let code: Swift.Int
   public let error: Swift.String
@@ -23,6 +26,9 @@ public struct GPAPIClientError : Swift.Decodable, Swift.Error {
 public struct URLCallBackCoordinator {
   public static func canHandleReturnURL(_ url: Swift.String) -> Swift.Bool
   public static func handleReturnURL(_ url: Swift.String) -> Swift.Bool
+}
+extension UIKit.UIStackView {
+  @_Concurrency.MainActor @preconcurrency public func removeAllSubviews()
 }
 extension Swift.String {
   public func toDate(format: Swift.String, locale: Foundation.Locale = .current, timeZone: Foundation.TimeZone? = .current, calendar: Foundation.Calendar = Calendar(identifier: .gregorian)) -> Foundation.Date?
@@ -107,65 +113,6 @@ public struct ValidatorDictionary<T> : Swift.Sequence {
   public typealias Element = Swift.Dictionary<Swift.ObjectIdentifier, T>.Iterator.Element
   public typealias Iterator = Swift.DictionaryIterator<Swift.ObjectIdentifier, T>
 }
-@_inheritsConvenienceInitializers public class OnlyLetterRule : GamePaySDK.RegexRule {
-  convenience public init(message: Swift.String = "This field can only contain letters and numbers.")
-  override public init(regex: Swift.String, message: Swift.String = super)
-  @objc deinit
-}
-@_inheritsConvenienceInitializers public class LetterAndNumberRule : GamePaySDK.RegexRule {
-  convenience public init(message: Swift.String = "This field can only contain letters and numbers.")
-  override public init(regex: Swift.String, message: Swift.String = super)
-  @objc deinit
-}
-@_inheritsConvenienceInitializers public class LetterNumberAndSpaceRule : GamePaySDK.RegexRule {
-  convenience public init(message: Swift.String = "This field can only contain letters and numbers.")
-  override public init(regex: Swift.String, message: Swift.String = super)
-  @objc deinit
-}
-@_inheritsConvenienceInitializers public class IBANLetterAndNumberRule : GamePaySDK.RegexRule {
-  convenience public init(message: Swift.String = "IBAN Invalid Format")
-  override public init(regex: Swift.String, message: Swift.String = super)
-  @objc deinit
-}
-@_inheritsConvenienceInitializers final public class UsernameRule : GamePaySDK.RegexRule {
-  convenience public init(message: Swift.String = "Username Invalid Format")
-  override public init(regex: Swift.String, message: Swift.String = super)
-  @objc deinit
-}
-final public class UsernameLengthRule : GamePaySDK.Rule {
-  public init()
-  final public func validate(_ value: Swift.String) -> Swift.Bool
-  final public func errorMessage() -> Swift.String
-  @objc deinit
-}
-@_inheritsConvenienceInitializers final public class UsernameFirstLetterRule : GamePaySDK.RegexRule {
-  convenience public init(message: Swift.String = "Username Invalid Format")
-  override public init(regex: Swift.String, message: Swift.String = super)
-  @objc deinit
-}
-@_inheritsConvenienceInitializers final public class ExistUsernameRule : GamePaySDK.RegexRule {
-  convenience public init(currentName: Swift.String, message: Swift.String = "User is taken.")
-  override public init(regex: Swift.String, message: Swift.String = super)
-  @objc deinit
-}
-public class CardExpiryMonthRule : GamePaySDK.Rule {
-  public init(message: Swift.String = "Must be a valid calendar month")
-  public func validate(_ value: Swift.String) -> Swift.Bool
-  public func errorMessage() -> Swift.String
-  @objc deinit
-}
-public class CardExpiryYearRule : GamePaySDK.Rule {
-  public init(message: Swift.String = "Must be within 3 years of validity")
-  public func validate(_ value: Swift.String) -> Swift.Bool
-  public func errorMessage() -> Swift.String
-  @objc deinit
-}
-public class ConfirmationRule : GamePaySDK.Rule {
-  public init(confirmField: any Swift.AnyObject & GamePaySDK.Validatable, message: Swift.String = "This field does not match")
-  public func validate(_ value: Swift.String) -> Swift.Bool
-  public func errorMessage() -> Swift.String
-  @objc deinit
-}
 @_inheritsConvenienceInitializers public class EmailRule : GamePaySDK.RegexRule {
   convenience public init(message: Swift.String = "Please enter a valid email address")
   override public init(regex: Swift.String, message: Swift.String = super)
@@ -195,16 +142,6 @@ public class MinLengthRule : GamePaySDK.Rule {
   public init(length: Swift.Int, message: Swift.String = "Must be at least %ld characters long")
   public func validate(_ value: Swift.String) -> Swift.Bool
   public func errorMessage() -> Swift.String
-  @objc deinit
-}
-@_inheritsConvenienceInitializers public class PasswordRule : GamePaySDK.RegexRule {
-  convenience public init(message: Swift.String = "Must be 8 characters with 1 uppercase")
-  override public init(regex: Swift.String, message: Swift.String = super)
-  @objc deinit
-}
-@_inheritsConvenienceInitializers public class PhoneNumberRule : GamePaySDK.RegexRule {
-  convenience public init(message: Swift.String = "Enter a valid 10 digit phone number")
-  override public init(regex: Swift.String, message: Swift.String = super)
   @objc deinit
 }
 open class RegexRule : GamePaySDK.Rule {
@@ -263,20 +200,22 @@ public class LinkOutPaymentHandler {
   public func getPaymentStatus(completionHandler: @escaping ([GamePaySDK.WidgetPayment]) -> Swift.Void)
   @objc deinit
 }
-public struct BrickCard : Swift.Codable, Swift.Equatable, Swift.Hashable {
+public struct BrickCard : Swift.Codable, Swift.Hashable {
   public let expireMonth: Swift.String
   public let expireYear: Swift.String
   public let lastFour: Swift.String
   public let token: Swift.String
   public let type: Swift.String
-  public let country: Swift.String
-  public init(from decoder: any Swift.Decoder) throws
-  public func encode(to encoder: any Swift.Encoder) throws
-  public static func == (a: GamePaySDK.BrickCard, b: GamePaySDK.BrickCard) -> Swift.Bool
+  public let country: Swift.String?
   public func hash(into hasher: inout Swift.Hasher)
+  public func encode(to encoder: any Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension GamePaySDK.BrickCard : Swift.Equatable {
+  public static func == (lhs: GamePaySDK.BrickCard, rhs: GamePaySDK.BrickCard) -> Swift.Bool
 }
 public struct BrickCharge : Swift.Codable {
   public enum Risk : Swift.String, Swift.Codable {
@@ -311,12 +250,14 @@ public struct PayAltoMethodResponse : Swift.Codable {
   public let name: Swift.String
   public let imgUrl: Swift.String
   public let psTypeId: Swift.Int
+  public let short: Swift.String?
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
 @_hasMissingDesignatedInitializers public class PayAltoPaymentOption : GamePaySDK.PaymentOption {
   public var psId: Swift.String
   public var psTypeId: Swift.Int
+  public var short: Swift.String?
   public var setting: GamePaySDK.PayAltoPaymentOption.Setting
   public init()
   public struct Setting {
@@ -334,8 +275,9 @@ public struct PaymentObject {
   public let name: Swift.String
   public let price: Swift.Double
   public let currency: Swift.String
+  public var email: Swift.String?
   public let image: UIKit.UIImage?
-  public init(itemID: Swift.String, userID: Swift.String, name: Swift.String, price: Swift.Double, currency: Swift.String, image: UIKit.UIImage?)
+  public init(itemID: Swift.String, userID: Swift.String, name: Swift.String, price: Swift.Double, currency: Swift.String, email: Swift.String? = nil, image: UIKit.UIImage? = nil)
 }
 @_hasMissingDesignatedInitializers public class PaymentOption {
   public func setKeys(projectKey: Swift.String? = nil, secretKey: Swift.String? = nil)
