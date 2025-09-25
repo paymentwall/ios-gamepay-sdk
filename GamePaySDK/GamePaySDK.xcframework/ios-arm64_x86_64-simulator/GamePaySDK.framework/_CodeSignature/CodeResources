@@ -4,9 +4,17 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>.metadata-version</key>
+		<data>
+		D4wATqLmMoElNF7P9EfLDezaMg0=
+		</data>
 		<key>Assets.car</key>
 		<data>
-		NqPJXjClxEOwj4MY8wI70LG0alk=
+		jAUGt8DYeA6hRPzJYuSyrlhkodE=
+		</data>
+		<key>Container.Arguments.erb</key>
+		<data>
+		Pw5yjo+XeObpZ1xUcbAvaGtD41g=
 		</data>
 		<key>Headers/GamePaySDK.h</key>
 		<data>
@@ -14,60 +22,102 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		ixa56PXOLAtitLbUtNTzHWLEszk=
+		6xr/D3leSmLHF9yR5Q/54tt0ZKc=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		nZWfbjg42g/1iJnSNMggmvI2oVo=
+		LS8y8b5QAAuGX50FJjoL2AtpUoU=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		BU5bQiM/+V4Udfl9u62fYZ6Bm4A=
+		JIX+XCGXQgLHzS+aAbyc0bM3NXk=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		wRMHFj2bjjOvVuvANvEljOR4TxY=
+		Ewy7Lpbmr3CV6fV9m6EPw62fDKc=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		QakR1U3yAwsi4nHgTaWUjoAFpLU=
+		sCl1syld4bF9uJCU+kDOnUjV8kc=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		r7nKR1xKuD26Y1hOy2r/kes8pNc=
+		BtTC5Bcmn2Wk5sSp1HncoZ3opAY=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		nZWfbjg42g/1iJnSNMggmvI2oVo=
+		LS8y8b5QAAuGX50FJjoL2AtpUoU=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		qnGJDCRfyqIlouYF1gNSZ0KqS+4=
+		o8+n8FC1uHzeUYgQZTC4FrkdUto=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		6ZlYkRSyAMRTcpSiFw+71BadhWU=
+		FSx2D8VQJ0rE8q3e6Ev8n6Tg4lQ=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		bQPwhg+oQU4uc7UK7ssCmQGAJMY=
+		QGcjwVuFhDiPzIucy4FDnLleBik=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		k49lU/9SDDuwGj3O3SDRez+9vmg=
+		NSXw1Uf01RsXb1fmxcn8RGqYg18=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		LxjlAe21wxn1PnsGUhPXClWDo3g=
 		</data>
+		<key>PayPalOpen-Regular.otf</key>
+		<data>
+		dcV6GAIoKTaKakAshiG3N2mamHY=
+		</data>
+		<key>PhoneNumberMetadata.json</key>
+		<data>
+		wzNqfsh5QwY+E2a/W7/7de5qM+8=
+		</data>
+		<key>PhoneNumberMetadata.xml</key>
+		<data>
+		zSDph8EGvKCqDsF4bRMMvyhjpDs=
+		</data>
+		<key>PrivacyInfo.xcprivacy</key>
+		<data>
+		AsGWXTZZNiiA2K0mG3kTPcRZ83U=
+		</data>
+		<key>Resolver.erb</key>
+		<data>
+		LqgWAe0ts3MkkB10kNKFxqQv6UQ=
+		</data>
+		<key>ServiceEntry.TypeForwarding.erb</key>
+		<data>
+		j7NBlo2GWSZ3KxkTeQX7K+jdKus=
+		</data>
+		<key>SwinjectInfo.plist</key>
+		<data>
+		Vf1W6euh49Txanjt9zJRriQ/SdY=
+		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>.metadata-version</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			K5sBb//0yiKk/nz/g46TNEwPb6CTlbyT9kM49T75eU0=
+			</data>
+		</dict>
 		<key>Assets.car</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			XSCkPHj5qitv7a6ooXyr1UFBZul/ihE+LHGsO4s2f4U=
+			hTTjxNLU069KWx0BxNihSQvha/FPZh+qAnoiUnaKtFg=
+			</data>
+		</dict>
+		<key>Container.Arguments.erb</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			yiQsvQysEkiJ3FM/cvtMQ3P9bBchczjlrkhxox3xwBg=
 			</data>
 		</dict>
 		<key>Headers/GamePaySDK.h</key>
@@ -81,70 +131,70 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6m5JlWdPocD5ewPkqJ0jr2+Qeg93EQ3bOLxeeCS7fbg=
+			I0bkbE9VhhDEhMQn0ZEUAx993nYGrsciAitACFLO+lw=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			IogqKGKFpivDAhNg1NIEcsfWcgKLJ/e5JpfVNRusG64=
+			SCIUTKW2Saq49AWqJtBJseHQtZ0nE1KwQiDnU3bctiI=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			70GIeaO98QS2h0QRsRXnKdeZMFq/6BmRdMZ96KT1m80=
+			kUa6piOXERBAsOLp14g+qviMgoXchtJUaHEhf3FVicI=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			0trzW6GTnX4YU/j44zdN9aHQfBWwXhj2S5+fzrvgAiU=
+			tzjsHDCL81qbuIDVn73QWF6FqVlZMxIoiXT+Y6RW8fs=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VnyetMAr6kMZfoic2iY+6seau3096sPf6oW/whbul6s=
+			qIHaRkmS4m/cO/JxYRioJgb3KRXm39dqrpjxvRpqsNM=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			6m5JlWdPocD5ewPkqJ0jr2+Qeg93EQ3bOLxeeCS7fbg=
+			I0bkbE9VhhDEhMQn0ZEUAx993nYGrsciAitACFLO+lw=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			R6Nv7Y64WsKJ/Mz0TVhexbvnZ1P8y3FzkKCLade4SOQ=
+			LgI4PnNEjucfMf0CmnlvfVXKbsTRSaYv4QFk6hLgQ/M=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3WwUu4rIcmG4MUmcZlSqh2nNT3U/fKGJlS4adRRNNVs=
+			MVRjOSkBu1hZBGM4n1OXg8RLGKQH+/L2XwMbSj21iYQ=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RMvPodM7Hf/xXILSgC88QzuuVSj2x8ZOpCXc4K90Qf4=
+			s6D38Kmljk2KwGiOd6LZEVZorJn7lSLrZfidSRgNZcg=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Re1E38OjKg1+4M3MZm8zJunm4xs/QSkMNKN1qIj6CB0=
+			8ezAXvUJQ3rFzo6fcvMNsFi8YxFFcFV4PmvVMF+1F/Q=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -152,6 +202,55 @@
 			<key>hash2</key>
 			<data>
 			LUrZgFTH2nIAzL3caxjaM7m6xVlAiGS0xLvCFtbsK0Q=
+			</data>
+		</dict>
+		<key>PayPalOpen-Regular.otf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DX7bcXUOS83JEEK3om+HX2t5atHHhn8oZqaiNW6G4cw=
+			</data>
+		</dict>
+		<key>PhoneNumberMetadata.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			oOMdKcSsE0R6CSxqnhQvhLoRclP+jge7vs/kFuZcRo0=
+			</data>
+		</dict>
+		<key>PhoneNumberMetadata.xml</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			8FwXYENcviyf52FbPq6z5DT3nxrAWmMo9FLMjC29uKs=
+			</data>
+		</dict>
+		<key>PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			oOieiiHwPwrN8Jcb7UfQIsN5K/r7ZuKQ3AfMZT8usiw=
+			</data>
+		</dict>
+		<key>Resolver.erb</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			8ozVyrSay0aQ6nPCybwZqO65VTPR3ZjzxTxCCNfOf8w=
+			</data>
+		</dict>
+		<key>ServiceEntry.TypeForwarding.erb</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			e3P+OSb4RbuJ2rIDHE+lltl5y434BENvGgLCyItbqjs=
+			</data>
+		</dict>
+		<key>SwinjectInfo.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ESGjJYjCS1pBVIsrnnef6fg7luxhYRHRomCn3lqp9Qo=
 			</data>
 		</dict>
 	</dict>

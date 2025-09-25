@@ -10,6 +10,8 @@ import GamePaySDK
 
 class PaymentSheetExampleViewController: UIViewController {
     private var paymentSheet: PaymentSheet?
+    private let projectKey = "xxx"
+    private let secretKey = "xxx"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,32 +20,22 @@ class PaymentSheetExampleViewController: UIViewController {
     
     // The action method for the button
     @IBAction func buttonTapped() {
-        // brick
-        let brickOption = BrickPaymentOption()
-        brickOption.setKeys(projectKey: "7780a2d33f236b4f24623f1a103d44aa",
-                            secretKey: "9d8884beeb76162785fc92639da37a33")
-        // payalto
-        let payAltoOption = PayAltoPaymentOption()
-        var payAltoSetting = PayAltoPaymentOption.Setting()
-        payAltoSetting.countryCode = "KR"
-        payAltoOption.setting = payAltoSetting
-        payAltoOption.setKeys(projectKey: "dea07cfb5300badc9b002009facad651",
-                              secretKey: "dec31fb340f14b63b42f458431e12d12")
-        
-        let paymentOptions: [PaymentOption] = [brickOption, payAltoOption]
-        let configuration = PaymentSheet.Configuration(paymentOptions: paymentOptions)
+        let configuration = PaymentSheet.Configuration()
+        configuration.setKeys(projectKey: projectKey,
+                              secretKey: secretKey)
         configuration.merchantDisplayName = "Demo Merchant"
         configuration.merchantTermsOfServiceURL = "https://fasterpay.com/terms-of-service"
         configuration.merchantPrivacyPolicyURL = "https://fasterpay.com/privacy-policy"
-        configuration.environment = .production
-        
+        configuration.clientUrl = "gp-demo://pay-alto-redirect-success"
         let payment = PaymentObject(
-            itemID: UUID().uuidString,
-            userID: "test-user-id",
+            itemID: "itemID",
+            userID: "userID",
             name: "Test",
-            price: 0.99,
+            price: 10,
             currency: "USD",
-            image: nil
+            countryCode: "US",
+            email: "user@mail.com",
+            customParams: [:]
         )
         paymentSheet = PaymentSheet(payment: payment, configuration: configuration)
         paymentSheet?.present(from: self, delegate: self)
@@ -51,7 +43,7 @@ class PaymentSheetExampleViewController: UIViewController {
 }
 
 extension PaymentSheetExampleViewController: PaymentSheetDelegate {
-    func handlePaymentResult(_ result: PaymentSheetResult) {
+    func handlePaymentResult(_ result: GamePaySDK.PaymentResult) {
         let status: String
         switch result.status {
         case .completed:
@@ -79,18 +71,31 @@ extension PaymentSheetExampleViewController: PaymentSheetDelegate {
                   completeHandler: nil)
     }
     
-    func handleChargeRequest(token: BrickOTTResponse,
-                             payment: PaymentObject,
-                             completionHandler: @escaping (Data) -> Void) {
-        var req = URLRequest(url: URL(string: "http://192.168.13.208:3000/charge")!)
-        let bodyDict: [String: Any] = ["token": token.token,
-                                       "email": token.email ?? "test_t3_sdk@gmail.com",
-                                       "amount": payment.price,
-                                       "currency": payment.currency]
+    func handleChargeRequest(_ parameters: GamePaySDK.ChargeRequestParameters) {
+        var req = URLRequest(url: URL(string: "http://feature-1-2-0.game-pay-demo-merchant-server.terminal3.stuffio.com/charge")!)
+        var bodyDict: [String: Any?] = [
+            "token": parameters.cardToken,
+            "email": parameters.cardData["email"],
+            "firstname": parameters.cardData["firstname"],
+            "lastname": parameters.cardData["lastname"],
+            "amount": parameters.payment.price,
+            "currency": parameters.payment.currency,
+            "secretKey": secretKey,
+        ]
+        if let refID = parameters.refID {
+            bodyDict["reference_id"] = refID
+        }
+        if let secureToken = parameters.secureToken {
+            bodyDict["brick_secure_token"] = secureToken
+        }
+        if let chargeID = parameters.chargeId {
+            bodyDict["brick_charge_id"] = chargeID
+        }
         if let data = try? JSONSerialization.data(withJSONObject: bodyDict, options: []) {
             req.httpBody = data
         }
         req.httpMethod = "POST"
+        req.timeoutInterval = 60
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         URLSession.shared.dataTask(with: req, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
@@ -100,7 +105,7 @@ extension PaymentSheetExampleViewController: PaymentSheetDelegate {
                 }
                 
                 if let data = data {
-                    completionHandler(data)
+                    parameters.completionHandler(data)
                 }
             }
         }).resume()

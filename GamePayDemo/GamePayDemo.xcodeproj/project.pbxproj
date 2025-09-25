@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA31893B2E0A547300A94BA2 /* GamePaySDK in Frameworks */ = {isa = PBXBuildFile; productRef = BA31893A2E0A547300A94BA2 /* GamePaySDK */; };
+		BA01462F2E84F8FC0062CA0C /* CardinalMobile in Frameworks */ = {isa = PBXBuildFile; productRef = BA01462E2E84F8FC0062CA0C /* CardinalMobile */; };
+		BA0146312E84F8FC0062CA0C /* GamePaySDK in Frameworks */ = {isa = PBXBuildFile; productRef = BA0146302E84F8FC0062CA0C /* GamePaySDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA31893B2E0A547300A94BA2 /* GamePaySDK in Frameworks */,
+				BA0146312E84F8FC0062CA0C /* GamePaySDK in Frameworks */,
+				BA01462F2E84F8FC0062CA0C /* CardinalMobile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +95,8 @@
 			);
 			name = GamePayDemo;
 			packageProductDependencies = (
-				BA31893A2E0A547300A94BA2 /* GamePaySDK */,
+				BA01462E2E84F8FC0062CA0C /* CardinalMobile */,
+				BA0146302E84F8FC0062CA0C /* GamePaySDK */,
 			);
 			productName = GamePayDemo;
 			productReference = 1F3E1FBA2DF92DA000D30F9C /* GamePayDemo.app */;
@@ -124,7 +127,7 @@
 			mainGroup = 1F3E1FB12DF92DA000D30F9C;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				BA3189372E0A52E900A94BA2 /* XCLocalSwiftPackageReference "../../ios-gamepay-sdk" */,
+				BA01462D2E84F8FC0062CA0C /* XCLocalSwiftPackageReference "../../ios-gamepay-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1F3E1FBB2DF92DA000D30F9C /* Products */;
@@ -362,16 +365,19 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		BA3189372E0A52E900A94BA2 /* XCLocalSwiftPackageReference "../../ios-gamepay-sdk" */ = {
+		BA01462D2E84F8FC0062CA0C /* XCLocalSwiftPackageReference "../../ios-gamepay-sdk" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../ios-gamepay-sdk";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BA31893A2E0A547300A94BA2 /* GamePaySDK */ = {
+		BA01462E2E84F8FC0062CA0C /* CardinalMobile */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BA3189372E0A52E900A94BA2 /* XCLocalSwiftPackageReference "../../ios-gamepay-sdk" */;
+			productName = CardinalMobile;
+		};
+		BA0146302E84F8FC0062CA0C /* GamePaySDK */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = GamePaySDK;
 		};
 /* End XCSwiftPackageProductDependency section */

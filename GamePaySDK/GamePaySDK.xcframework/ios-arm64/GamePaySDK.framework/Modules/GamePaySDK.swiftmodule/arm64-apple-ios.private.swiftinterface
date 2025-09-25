@@ -1,12 +1,15 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
-// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name GamePaySDK
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name GamePaySDK
+// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+import CardinalMobile
+import Combine
+import Contacts
 import CryptoKit
 import DeveloperToolsSupport
 import Foundation
 @_exported import GamePaySDK
 import Photos
-import SafariServices
 import Security
 import Swift
 import SwiftUI
@@ -15,166 +18,274 @@ import WebKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-public typealias APICompletionHandler<T> = (Swift.Result<T, GamePaySDK.GPAPIClientError>) -> Swift.Void where T : Swift.Decodable
-public typealias HTTPHeaders = [Swift.String : Swift.String]
-public typealias Parameters = [Swift.String : Any]
-public struct GPAPIClientError : Swift.Decodable, Swift.Error {
-  public let code: Swift.Int
-  public let error: Swift.String
-  public init(from decoder: any Swift.Decoder) throws
+extension GamePaySDK.PhoneNumber {
+  public func adjustedNationalNumber() -> Swift.String
 }
-extension Foundation.Bundle {
-  @_spi(STP) public class func stp_applicationName() -> Swift.String?
-  @_spi(STP) public class func stp_applicationVersion() -> Swift.String?
-  @_spi(STP) public class func stp_applicationBundleId() -> Swift.String?
-  @_spi(STP) public class func buildVersion() -> Swift.String?
-  @_spi(STP) public class var displayName: Swift.String? {
+@_hasMissingDesignatedInitializers final public class Lazy<Service> {
+  final public var instance: Service {
+    get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class Provider<Service> {
+  final public var instance: Service {
+    get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class PaymentOption {
+  public func setKeys(projectKey: Swift.String? = nil, secretKey: Swift.String? = nil)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPDivider : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public init(color: UIKit.UIColor = GPAssets.lavender100.color, height: CoreFoundation.CGFloat = 1)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class Container {
+  convenience public init(parent: GamePaySDK.Container? = nil, defaultObjectScope: GamePaySDK.ObjectScope = .graph, behaviors: [any GamePaySDK.Behavior] = [], registeringClosure: (GamePaySDK.Container) -> Swift.Void = { _ in })
+  final public func removeAll()
+  final public func resetObjectScope(_ objectScope: any GamePaySDK.ObjectScopeProtocol)
+  final public func resetObjectScope(_ objectScope: GamePaySDK.ObjectScope)
+  final public func resetObjectScope(_ objectScope: any GamePaySDK.ObjectScopeProtocol, serviceType: any Any.Type)
+  final public func resetObjectScope(_ objectScope: GamePaySDK.ObjectScope, serviceType: any Any.Type)
+  @discardableResult
+  final public func register<Service>(_ serviceType: Service.Type, name: Swift.String? = nil, factory: @escaping (any GamePaySDK.Resolver) -> Service) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func _register<Service, Arguments>(_ serviceType: Service.Type, factory: @escaping (Arguments) -> Any, name: Swift.String? = nil, option: (any GamePaySDK.ServiceKeyOption)? = nil) -> GamePaySDK.ServiceEntry<Service>
+  final public func synchronize() -> any GamePaySDK.Resolver
+  final public func addBehavior(_ behavior: any GamePaySDK.Behavior)
+  final public func hasAnyRegistration<Service>(of serviceType: Service.Type, name: Swift.String? = nil) -> Swift.Bool
+  final public func withObjectGraph<T>(_ identifier: GamePaySDK.GraphIdentifier, closure: (GamePaySDK.Container) throws -> T) rethrows -> T
+  @objc deinit
+}
+extension GamePaySDK.Container : GamePaySDK._Resolver {
+  final public func _resolve<Service, Arguments>(name: Swift.String?, option: (any GamePaySDK.ServiceKeyOption)? = nil, invoker: @escaping ((Arguments) -> Any) -> Any) -> Service?
+}
+extension GamePaySDK.Container : GamePaySDK.Resolver {
+  final public func resolve<Service>(_ serviceType: Service.Type) -> Service?
+  final public func resolve<Service>(_: Service.Type, name: Swift.String?) -> Service?
+}
+extension GamePaySDK.Container : Swift.CustomStringConvertible {
+  final public var description: Swift.String {
     get
   }
 }
-public struct URLCallBackCoordinator {
-  public static func canHandleReturnURL(_ url: Swift.String) -> Swift.Bool
-  public static func handleReturnURL(_ url: Swift.String) -> Swift.Bool
+@objc @_Concurrency.MainActor @preconcurrency public class GPQuaternaryButton : GamePaySDK.GPBaseButton {
+  @_Concurrency.MainActor @preconcurrency public init(theme: GamePaySDK.GPTheme)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
-extension UIKit.UIStackView {
-  @_Concurrency.MainActor @preconcurrency public func removeAllSubviews()
-}
-extension Swift.String {
-  public func toDate(format: Swift.String, locale: Foundation.Locale = .current, timeZone: Foundation.TimeZone? = .current, calendar: Foundation.Calendar = Calendar(identifier: .gregorian)) -> Foundation.Date?
-}
-extension Foundation.Date {
-  public func get(_ components: Foundation.Calendar.Component..., calendar: Foundation.Calendar = Calendar.current) -> Foundation.DateComponents
-  public func get(_ component: Foundation.Calendar.Component, calendar: Foundation.Calendar = Calendar.current) -> Swift.Int
-}
-extension Foundation.URL {
-  public var queryParameters: [Swift.String : Swift.String]? {
+final public class Assembler {
+  final public var resolver: any GamePaySDK.Resolver {
     get
   }
+  public init(container: GamePaySDK.Container? = Container())
+  public init(parentAssembler: GamePaySDK.Assembler?, defaultObjectScope: GamePaySDK.ObjectScope = .graph, behaviors: [any GamePaySDK.Behavior] = [])
+  @available(*, deprecated, message: "Use not throwing alternative: init(_:, container:)")
+  convenience public init(assemblies: [any GamePaySDK.Assembly], container: GamePaySDK.Container? = Container()) throws
+  public init(_ assemblies: [any GamePaySDK.Assembly], container: GamePaySDK.Container = Container())
+  @available(*, deprecated, message: "Use not throwing alternative: init(_:, parent:)")
+  convenience public init(assemblies: [any GamePaySDK.Assembly], parentAssembler: GamePaySDK.Assembler?) throws
+  public init(_ assemblies: [any GamePaySDK.Assembly], parent: GamePaySDK.Assembler?, defaultObjectScope: GamePaySDK.ObjectScope = .graph, behaviors: [any GamePaySDK.Behavior] = [])
+  final public func apply(assembly: any GamePaySDK.Assembly)
+  final public func apply(assemblies: [any GamePaySDK.Assembly])
+  @objc deinit
 }
 extension UIKit.UIViewController {
   @_Concurrency.MainActor @preconcurrency public func showAlert(title: Swift.String?, message: Swift.String, okButtonTitle: Swift.String, okButtonHandler: ((UIKit.UIAlertAction) -> Swift.Void)?, cancelButtonTitle: Swift.String, cancelButtonHandler: ((UIKit.UIAlertAction) -> Swift.Void)?)
   @_Concurrency.MainActor @preconcurrency public func showAlert(title: Swift.String?, message: Swift.String, actionTitle: Swift.String = "OK", completeHandler: ((UIKit.UIAlertAction) -> Swift.Void)?)
+  @_Concurrency.MainActor @preconcurrency public func showSimpleError(message: Swift.String)
 }
-public protocol FormViewValidatable {
-  var validator: GamePaySDK.Validator { get }
-  var allValidatableFields: [any GamePaySDK.ErrorMessageProvider] { get }
-}
-public protocol ErrorMessageProvider {
-  func showError(message: Swift.String?)
-  func hideError()
-}
-extension GamePaySDK.FormViewValidatable where Self : UIKit.UIViewController {
-  public func showValidationErrors(_ errors: [(any GamePaySDK.Validatable, GamePaySDK.ValidationError)], animated: Swift.Bool = true)
-  public func hideValidationErrors(animated: Swift.Bool = true)
-}
-extension GamePaySDK.FormViewValidatable where Self : UIKit.UIView {
-  public func showValidationErrors(_ errors: [(any GamePaySDK.Validatable, GamePaySDK.ValidationError)], animated: Swift.Bool = true)
-  public func hideValidationErrors(animated: Swift.Bool = true)
-}
-public typealias ValidatableField = Swift.AnyObject & GamePaySDK.Validatable
-public protocol Validatable {
-  var validationText: Swift.String { get }
-}
-extension UIKit.UITextField : GamePaySDK.Validatable {
-  @_Concurrency.MainActor @preconcurrency public var validationText: Swift.String {
+public enum PayAltoInstructionAction : Swift.String, Swift.Codable {
+  case showForm
+  case redirectUrl
+  case redirectUrlInApp
+  case showSuccessMessage
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
     get
   }
 }
-extension UIKit.UITextView : GamePaySDK.Validatable {
-  @_Concurrency.MainActor @preconcurrency public var validationText: Swift.String {
-    get
+public struct PayAltoInstructionResponse : Swift.Codable {
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct PayAltoInstructionElement : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension GamePaySDK.PaymentSheet {
+  public class Configuration {
+    public var paymentOptions: [GamePaySDK.PaymentOption]
+    public var merchantDisplayName: Swift.String
+    public var merchantTermsOfServiceURL: Swift.String?
+    public var merchantPrivacyPolicyURL: Swift.String?
+    public var clientUrl: Swift.String
+    public var widget: Swift.String
+    public var theme: GamePaySDK.GPTheme
+    public var style: GamePaySDK.PaymentSheet.UserInterfaceStyle {
+      get
+      set
+    }
+    public var environment: GamePaySDK.PaymentSheet.Environment
+    public var projectKey: Swift.String?
+    public var secretKey: Swift.String?
+    public init()
+    public func setKeys(projectKey: Swift.String? = nil, secretKey: Swift.String? = nil)
+    @objc deinit
   }
 }
-public protocol ValidationDelegate {
-  func validationSuccessful()
-  func validationFailed(_ errors: [(any GamePaySDK.Validatable, GamePaySDK.ValidationError)])
-}
-@objc public class ValidationError : ObjectiveC.NSObject {
-  final public let field: any Swift.AnyObject & GamePaySDK.Validatable
-  public var errorLabel: UIKit.UILabel?
-  final public let errorMessage: Swift.String
-  public init(field: any Swift.AnyObject & GamePaySDK.Validatable, errorLabel: UIKit.UILabel?, error: Swift.String)
-  @objc deinit
-}
-public class Validator {
-  public var validations: GamePaySDK.ValidatorDictionary<GamePaySDK.ValidationRule>
-  public var errors: GamePaySDK.ValidatorDictionary<GamePaySDK.ValidationError>
-  public init()
-  public func validateField(_ field: any Swift.AnyObject & GamePaySDK.Validatable, callback: (_ error: GamePaySDK.ValidationError?) -> Swift.Void)
-  public func styleTransformers(success: ((_ validationRule: GamePaySDK.ValidationRule) -> Swift.Void)?, error: ((_ validationError: GamePaySDK.ValidationError) -> Swift.Void)?)
-  public func registerField(_ field: any Swift.AnyObject & GamePaySDK.Validatable, errorLabel: UIKit.UILabel? = nil, rules: [any GamePaySDK.Rule])
-  public func unregisterField(_ field: any Swift.AnyObject & GamePaySDK.Validatable)
-  public func validate(_ delegate: any GamePaySDK.ValidationDelegate)
-  public func validate(_ callback: (_ errors: [(any GamePaySDK.Validatable, GamePaySDK.ValidationError)]) -> Swift.Void)
-  @objc deinit
-}
-public struct ValidatorDictionary<T> : Swift.Sequence {
-  public subscript(key: (any Swift.AnyObject & GamePaySDK.Validatable)?) -> T? {
-    get
-    set(newValue)
+extension GamePaySDK.PaymentSheet {
+  public enum Environment : Swift.String {
+    case staging, production
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
   }
-  public mutating func removeAll()
-  public mutating func removeValueForKey(_ key: any Swift.AnyObject & GamePaySDK.Validatable)
-  public var isEmpty: Swift.Bool {
+}
+extension GamePaySDK.PaymentSheet {
+  public enum UserInterfaceStyle : Swift.Int {
+    case automatic
+    case alwaysLight
+    case alwaysDark
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+}
+@_hasMissingDesignatedInitializers public class BrickPaymentOption : GamePaySDK.PayAltoPaymentOption {
+  public init(name: Swift.String = "Card", iconUrl: Swift.String? = nil)
+  @objc deinit
+}
+public class PaymentSheet {
+  public var configuration: GamePaySDK.PaymentSheet.Configuration
+  public var payment: GamePaySDK.PaymentObject
+  public var assembler: GamePaySDK.Assembler {
+    get
+    set
+  }
+  required public init(payment: GamePaySDK.PaymentObject, configuration: GamePaySDK.PaymentSheet.Configuration)
+  public func present(from presentingViewController: UIKit.UIViewController, delegate: (any GamePaySDK.PaymentSheetDelegate)? = nil)
+  @objc deinit
+}
+public struct GPTheme {
+  public var colors: GamePaySDK.GPTheme.Colors
+  public var typography: GamePaySDK.GPTheme.Typography
+  public var appearance: GamePaySDK.GPTheme.Appearance
+  public init(colors: GamePaySDK.GPTheme.Colors, typography: GamePaySDK.GPTheme.Typography, appearance: GamePaySDK.GPTheme.Appearance)
+}
+extension GamePaySDK.GPTheme {
+  public struct Colors {
+    public var colorAccent: UIKit.UIColor
+    public var icColorInfo: UIKit.UIColor
+    public var icColorWarning: UIKit.UIColor
+    public var icColorError: UIKit.UIColor
+    public var icColorSuccess: UIKit.UIColor
+    public var bgDefaultLight: UIKit.UIColor
+    public var bgDefaultDark: UIKit.UIColor
+    public var bgPressPrimary: UIKit.UIColor
+    public var bgHoove: UIKit.UIColor
+    public var bgInactive: UIKit.UIColor
+    public var bgInfo: UIKit.UIColor
+    public var bgWarning: UIKit.UIColor
+    public var bgSuccess: UIKit.UIColor
+    public var bgError: UIKit.UIColor
+    public var bgPressSecondary: UIKit.UIColor
+    public var bgPaymentDark: UIKit.UIColor
+    public var borderPayment: UIKit.UIColor
+    public var borderSubtle: UIKit.UIColor
+    public var borderPrimary: UIKit.UIColor
+    public var borderError: UIKit.UIColor
+    public var borderKeyboardPrimary: UIKit.UIColor
+    public var borderKeyboardSeconday: UIKit.UIColor
+    public var borderMobile: UIKit.UIColor
+    public var textPrimary: UIKit.UIColor
+    public var textSecondary: UIKit.UIColor
+    public var textButtonLight: UIKit.UIColor
+    public var textButtonDark: UIKit.UIColor
+    public var textButtonInactivePrimary: UIKit.UIColor
+    public var textButtonInactiveSecondary: UIKit.UIColor
+    public var textError: UIKit.UIColor
+    public init(colorAccent: UIKit.UIColor, icColorInfo: UIKit.UIColor, icColorWarning: UIKit.UIColor, icColorError: UIKit.UIColor, icColorSuccess: UIKit.UIColor, bgDefaultLight: UIKit.UIColor, bgDefaultDark: UIKit.UIColor, bgPressPrimary: UIKit.UIColor, bgHoove: UIKit.UIColor, bgInactive: UIKit.UIColor, bgInfo: UIKit.UIColor, bgWarning: UIKit.UIColor, bgSuccess: UIKit.UIColor, bgError: UIKit.UIColor, bgPressSecondary: UIKit.UIColor, bgPaymentDark: UIKit.UIColor, borderPayment: UIKit.UIColor, borderSubtle: UIKit.UIColor, borderPrimary: UIKit.UIColor, borderError: UIKit.UIColor, borderKeyboardPrimary: UIKit.UIColor, borderKeyboardSeconday: UIKit.UIColor, borderMobile: UIKit.UIColor, textPrimary: UIKit.UIColor, textSecondary: UIKit.UIColor, textButtonLight: UIKit.UIColor, textButtonDark: UIKit.UIColor, textButtonInactivePrimary: UIKit.UIColor, textButtonInactiveSecondary: UIKit.UIColor, textError: UIKit.UIColor)
+  }
+}
+extension GamePaySDK.GPTheme {
+  public struct Typography {
+    public var heading1: UIKit.UIFont
+    public var heading2: UIKit.UIFont
+    public var heading3: UIKit.UIFont
+    public var heading4: UIKit.UIFont
+    public var heading5: UIKit.UIFont
+    public var label1: UIKit.UIFont
+    public var label2: UIKit.UIFont
+    public var button1: UIKit.UIFont
+    public var button2: UIKit.UIFont
+    public var body1: UIKit.UIFont
+    public var bodyMedium1: UIKit.UIFont
+    public var body2: UIKit.UIFont
+    public var bodyMedium2: UIKit.UIFont
+    public var bodyCompact1: UIKit.UIFont
+    public init(heading1: UIKit.UIFont, heading2: UIKit.UIFont, heading3: UIKit.UIFont, heading4: UIKit.UIFont, heading5: UIKit.UIFont, label1: UIKit.UIFont, label2: UIKit.UIFont, button1: UIKit.UIFont, button2: UIKit.UIFont, body1: UIKit.UIFont, bodyMedium1: UIKit.UIFont, body2: UIKit.UIFont, bodyMedium2: UIKit.UIFont, bodyCompact1: UIKit.UIFont)
+  }
+}
+extension GamePaySDK.GPTheme {
+  public struct Appearance {
+    public var formInsets: UIKit.NSDirectionalEdgeInsets
+    public var sectionSpacing: CoreFoundation.CGFloat
+    public var rowSpacing: CoreFoundation.CGFloat
+    public var cornerRadius: CoreFoundation.CGFloat
+    public var padding: CoreFoundation.CGFloat
+    public var borderWidth: CoreFoundation.CGFloat
+    public init(formInsets: UIKit.NSDirectionalEdgeInsets, sectionSpacing: CoreFoundation.CGFloat, rowSpacing: CoreFoundation.CGFloat, cornerRadius: CoreFoundation.CGFloat, padding: CoreFoundation.CGFloat, borderWidth: CoreFoundation.CGFloat)
+  }
+}
+public struct BrickCard : Swift.Codable, Swift.Hashable {
+  public let expireMonth: Swift.String
+  public let expireYear: Swift.String
+  public let lastFour: Swift.String
+  public let token: Swift.String?
+  public let type: Swift.String
+  public let country: Swift.String?
+  public let issuingType: Swift.String?
+  public let name: Swift.String?
+  public var email: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
     get
   }
-  public func makeIterator() -> Swift.DictionaryIterator<Swift.ObjectIdentifier, T>
-  public typealias Element = Swift.Dictionary<Swift.ObjectIdentifier, T>.Iterator.Element
-  public typealias Iterator = Swift.DictionaryIterator<Swift.ObjectIdentifier, T>
+  public init(from decoder: any Swift.Decoder) throws
 }
-@_inheritsConvenienceInitializers public class EmailRule : GamePaySDK.RegexRule {
-  convenience public init(message: Swift.String = "Please enter a valid email address")
-  override public init(regex: Swift.String, message: Swift.String = super)
+extension GamePaySDK.BrickCard : Swift.Equatable {
+  public static func == (lhs: GamePaySDK.BrickCard, rhs: GamePaySDK.BrickCard) -> Swift.Bool
+}
+public class GPDropdownOption : Swift.Codable {
+  public init(value: Swift.String, name: Swift.String, logoUrl: Swift.String? = nil)
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class LinkOutPaymentHandler {
+  public struct WidgetSetting {
+    public var customParams: [Swift.String : Any]
+    public init(projectKey: Swift.String, secretKey: Swift.String, userId: Swift.String, clientUrl: Swift.String, amount: Swift.Double, currencyCode: Swift.String, externalID: Swift.String, widget: Swift.String?, countryCode: Swift.String?, customParams: [Swift.String : Any] = [:])
+  }
+  public var environment: GamePaySDK.PaymentSheet.Environment
+  public init(with setting: GamePaySDK.LinkOutPaymentHandler.WidgetSetting, delegate: (any GamePaySDK.PaymentDelegate)?)
+  public func start(from viewController: UIKit.UIViewController)
   @objc deinit
 }
-public class ExactLengthRule : GamePaySDK.Rule {
-  public init(length: Swift.Int, message: Swift.String = "Must be exactly %ld characters long")
-  public func validate(_ value: Swift.String) -> Swift.Bool
-  public func errorMessage() -> Swift.String
-  @objc deinit
-}
-public class FullNameRule : GamePaySDK.Rule {
-  public init(message: Swift.String = "Please provide a first & last name")
-  public func validate(_ value: Swift.String) -> Swift.Bool
-  public func errorMessage() -> Swift.String
-  @objc deinit
-}
-public class MaxLengthRule : GamePaySDK.Rule {
-  public init()
-  public init(length: Swift.Int, message: Swift.String = "Must be at most %ld characters long")
-  public func validate(_ value: Swift.String) -> Swift.Bool
-  public func errorMessage() -> Swift.String
-  @objc deinit
-}
-public class MinLengthRule : GamePaySDK.Rule {
-  public init()
-  public init(length: Swift.Int, message: Swift.String = "Must be at least %ld characters long")
-  public func validate(_ value: Swift.String) -> Swift.Bool
-  public func errorMessage() -> Swift.String
-  @objc deinit
-}
-open class RegexRule : GamePaySDK.Rule {
-  public init(regex: Swift.String, message: Swift.String = "Invalid Regular Expression")
-  open func validate(_ value: Swift.String) -> Swift.Bool
-  open func errorMessage() -> Swift.String
-  @objc deinit
-}
-open class RequiredRule : GamePaySDK.Rule {
-  public init(message: Swift.String = "This field is required")
-  open func validate(_ value: Swift.String) -> Swift.Bool
-  open func errorMessage() -> Swift.String
-  @objc deinit
-}
-public protocol Rule {
-  func validate(_ value: Swift.String) -> Swift.Bool
-  func errorMessage() -> Swift.String
-}
-public class ValidationRule {
-  public var field: any Swift.AnyObject & GamePaySDK.Validatable
-  public var errorLabel: UIKit.UILabel?
-  public var rules: [any GamePaySDK.Rule]
-  public init(field: any Swift.AnyObject & GamePaySDK.Validatable, rules: [any GamePaySDK.Rule], errorLabel: UIKit.UILabel?)
-  public func validateField() -> GamePaySDK.ValidationError?
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPPhoneTextField : GamePaySDK.GPBaseTextField {
+  @_Concurrency.MainActor @preconcurrency override public var validationText: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency override public func getChildViews() -> [UIKit.UIView]
+  @_Concurrency.MainActor @preconcurrency public init(defaultCountry: Swift.String? = nil, title: Swift.String, placeholder: Swift.String, presentingVC: UIKit.UIViewController, theme: GamePaySDK.GPTheme)
   @objc deinit
 }
 public protocol KeychainManageable {
@@ -200,31 +311,414 @@ public struct BrickStoredCardKeychainManager : GamePaySDK.KeychainManageable {
   public let account: Swift.String
   public init(userId: Swift.String)
 }
-public class LinkOutPaymentHandler {
-  public struct WidgetSetting {
-    public init(projectKey: Swift.String, secretKey: Swift.String, userId: Swift.String, successUrl: Swift.String, amount: Swift.Double, currencyCode: Swift.String, externalID: Swift.String, countryCode: Swift.String?)
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPFormTextField : GamePaySDK.GPBaseTextField {
+  @_Concurrency.MainActor @preconcurrency public var onTextChanged: ((Swift.String) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onShouldReturn: (() -> Swift.Bool)?
+  @_Concurrency.MainActor @preconcurrency public var validator: GamePaySDK.Validator?
+  @_Concurrency.MainActor @preconcurrency public var text: Swift.String {
+    get
   }
-  public init(with setting: GamePaySDK.LinkOutPaymentHandler.WidgetSetting, extraParams: [Swift.String : Any] = [:], environment: GamePaySDK.PaymentSheet.Environment = .production)
-  public func start(successHandler: @escaping () -> Swift.Void)
-  public func getPaymentStatus(completionHandler: @escaping ([GamePaySDK.WidgetPayment]) -> Swift.Void)
+  @_Concurrency.MainActor @preconcurrency override public var validationText: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency final public let textField: UIKit.UITextField
+  @_Concurrency.MainActor @preconcurrency override public init(title: Swift.String, placeholder: Swift.String, formatter: (any GamePaySDK.TextFieldFormatter)? = nil, theme: GamePaySDK.GPTheme)
+  @_Concurrency.MainActor @preconcurrency override public func getChildViews() -> [UIKit.UIView]
+  @_Concurrency.MainActor @preconcurrency override public func setPlaceholder()
+  @_Concurrency.MainActor @preconcurrency override public func updateUIOnStateChanged()
+  @_Concurrency.MainActor @preconcurrency override public func showError(message: Swift.String?)
+  @_Concurrency.MainActor @preconcurrency override public func hideError()
   @objc deinit
 }
-public struct BrickCard : Swift.Codable, Swift.Hashable {
-  public let expireMonth: Swift.String
-  public let expireYear: Swift.String
-  public let lastFour: Swift.String
-  public let token: Swift.String
-  public let type: Swift.String
-  public let country: Swift.String?
-  public func hash(into hasher: inout Swift.Hasher)
+extension GamePaySDK.GPFormTextField : UIKit.UITextFieldDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic open func textField(_ textField: UIKit.UITextField, shouldChangeCharactersIn range: Foundation.NSRange, replacementString string: Swift.String) -> Swift.Bool
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func textFieldShouldReturn(_ textField: UIKit.UITextField) -> Swift.Bool
+}
+extension GamePaySDK.GPFormTextField {
+  @_Concurrency.MainActor @preconcurrency public func setText(_ text: Swift.String)
+  @_Concurrency.MainActor @preconcurrency public func setPlainTextField()
+}
+@_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPPayAltoDropdownTextField : GamePaySDK.GPDropdownTextField<GamePaySDK.GPIconTextDropdownCell>, GamePaySDK.FormElement {
+  @_Concurrency.MainActor @preconcurrency public var formKey: Swift.String
+  @_Concurrency.MainActor @preconcurrency public var formValue: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public init(formKey: Swift.String, options: [GamePaySDK.GPDropdownOption], title: Swift.String, placeholder: Swift.String, hasSearchOption: Swift.Bool = false, presentingVC: UIKit.UIViewController, theme: GamePaySDK.GPTheme, onSelect: ((GamePaySDK.GPDropdownOption) -> Swift.Void)? = nil)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPYearTextField : GamePaySDK.GPFormTextField {
+  @_Concurrency.MainActor @preconcurrency public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+public protocol Rule {
+  func validate(_ value: Swift.String) -> Swift.Bool
+  func errorMessage() -> Swift.String
+}
+public class MinLengthRule : GamePaySDK.Rule {
+  public init()
+  public init(length: Swift.Int, message: Swift.String = "Must be at least %ld characters long")
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPBaseDropdownCell : UIKit.UITableViewCell {
+  @_Concurrency.MainActor @preconcurrency open class var estimatedHeight: CoreFoundation.CGFloat {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency open func configureCell(with option: GamePaySDK.GPDropdownOption, isSelectedCell: Swift.Bool, placeholderImage: UIKit.UIImage? = nil, theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPCVVTextField : GamePaySDK.GPFormTextField {
+  @_Concurrency.MainActor @preconcurrency public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+public class ExactLengthRule : GamePaySDK.Rule {
+  public init(length: Swift.Int, message: Swift.String = "Must be exactly %ld characters long")
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+public class CVVRule : GamePaySDK.Rule {
+  public init(checkEmpty: Swift.Bool = false)
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPBaseTextField : UIKit.UIView, GamePaySDK.FormElementType {
+  @_Concurrency.MainActor @preconcurrency final public let theme: GamePaySDK.GPTheme
+  @_Concurrency.MainActor @preconcurrency public var placeholder: Swift.String {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency public var inputFormatter: (any GamePaySDK.TextFieldFormatter)?
+  @_Concurrency.MainActor @preconcurrency final public let height: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency open var validationText: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var maxLength: Swift.Int? {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var parentTextField: GamePaySDK.GPBaseTextField? {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var tfStackView: UIKit.UIStackView {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency public var titleLabel: UIKit.UILabel {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency public var errorView: GamePaySDK.ErrorView {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency public init(title: Swift.String, placeholder: Swift.String, formatter: (any GamePaySDK.TextFieldFormatter)? = nil, theme: GamePaySDK.GPTheme)
+  @_Concurrency.MainActor @preconcurrency open func getChildViews() -> [UIKit.UIView]
+  @_Concurrency.MainActor @preconcurrency open func getAdditionalViews() -> [UIKit.UIView]
+  @_Concurrency.MainActor @preconcurrency open func setPlaceholder()
+  @_Concurrency.MainActor @preconcurrency open func updateUIOnStateChanged()
+  @_Concurrency.MainActor @preconcurrency public func showError(message: Swift.String?)
+  @_Concurrency.MainActor @preconcurrency public func hideError()
+  @objc deinit
+}
+public class CardExpiredDateRule : GamePaySDK.Rule {
+  public init()
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+public struct URLCallBackCoordinator {
+  public static func canHandleReturnURL(_ url: Swift.String) -> Swift.Bool
+  public static func handleReturnURL(_ url: Swift.String) -> Swift.Bool
+}
+public struct ValidatorDictionary<T> : Swift.Sequence {
+  public subscript(key: (any Swift.AnyObject & GamePaySDK.Validatable)?) -> T? {
+    get
+    set(newValue)
+  }
+  public mutating func removeAll()
+  public mutating func removeValueForKey(_ key: any Swift.AnyObject & GamePaySDK.Validatable)
+  public var isEmpty: Swift.Bool {
+    get
+  }
+  public func makeIterator() -> Swift.DictionaryIterator<Swift.ObjectIdentifier, T>
+  public typealias Element = Swift.Dictionary<Swift.ObjectIdentifier, T>.Iterator.Element
+  public typealias Iterator = Swift.DictionaryIterator<Swift.ObjectIdentifier, T>
+}
+public protocol ValidationDelegate {
+  func validationSuccessful()
+  func validationFailed(_ errors: [(any GamePaySDK.Validatable, GamePaySDK.ValidationError)])
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPLabel2Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+public struct QuickPayResponse : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct QuickPayElements : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct GPAPIClientError : Swift.Decodable, Swift.Error {
+  public let code: Swift.Int?
+  public var error: Swift.String
+  public init(from decoder: any Swift.Decoder) throws
+}
+public typealias FormElementType = Swift.AnyObject & GamePaySDK.Validatable & GamePaySDK.ErrorMessageProvider
+public protocol FormElement : UIKit.UIView, GamePaySDK.ErrorMessageProvider, GamePaySDK.Validatable {
+  var formKey: Swift.String { get }
+  var formValue: Swift.String { get }
+}
+public protocol FormViewValidatable {
+  var validator: GamePaySDK.Validator { get }
+  var allValidatableFields: [any GamePaySDK.ErrorMessageProvider] { get }
+}
+public protocol ErrorMessageProvider {
+  func showError(message: Swift.String?)
+  func hideError()
+}
+extension GamePaySDK.FormViewValidatable where Self : UIKit.UIViewController {
+  public func showValidationErrors(_ errors: [(any GamePaySDK.Validatable, GamePaySDK.ValidationError)], animated: Swift.Bool = true)
+  public func hideValidationErrors(animated: Swift.Bool = true)
+}
+extension GamePaySDK.FormViewValidatable where Self : UIKit.UIView {
+  public func showValidationErrors(_ errors: [(any GamePaySDK.Validatable, GamePaySDK.ValidationError)], animated: Swift.Bool = true)
+  public func hideValidationErrors(animated: Swift.Bool = true)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPHeading4Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPHeading1Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+@objc open class PhoneNumberFormatter : Foundation.Formatter {
+  final public let phoneNumberKit: GamePaySDK.PhoneNumberKit
+  @objc dynamic public var generatesPhoneNumber: Swift.Bool
+  @objc dynamic public var defaultRegion: Swift.String {
+    @objc get
+    @objc set
+  }
+  @objc dynamic public var withPrefix: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc dynamic public var currentRegion: Swift.String {
+    @objc get
+  }
+  public init(phoneNumberKit pnk: GamePaySDK.PhoneNumberKit = PhoneNumberKit(), defaultRegion: Swift.String = PhoneNumberKit.defaultRegionCode(), withPrefix: Swift.Bool = true)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+extension GamePaySDK.PhoneNumberFormatter {
+  @objc override dynamic open func string(for obj: Any?) -> Swift.String?
+  @objc override dynamic open func getObjectValue(_ obj: Swift.AutoreleasingUnsafeMutablePointer<Swift.AnyObject?>?, for string: Swift.String, errorDescription error: Swift.AutoreleasingUnsafeMutablePointer<Foundation.NSString?>?) -> Swift.Bool
+  @objc override dynamic open func isPartialStringValid(_ partialStringPtr: Swift.AutoreleasingUnsafeMutablePointer<Foundation.NSString>, proposedSelectedRange proposedSelRangePtr: Foundation.NSRangePointer?, originalString origString: Swift.String, originalSelectedRange origSelRange: Foundation.NSRange, errorDescription error: Swift.AutoreleasingUnsafeMutablePointer<Foundation.NSString?>?) -> Swift.Bool
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPBodyMedium2Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+public struct PhoneNumber {
+  public let numberString: Swift.String
+  public let countryCode: Swift.UInt64
+  public let leadingZero: Swift.Bool
+  public let nationalNumber: Swift.UInt64
+  public let numberExtension: Swift.String?
+  public let type: GamePaySDK.PhoneNumberType
+  public let regionID: Swift.String?
+}
+extension GamePaySDK.PhoneNumber : Swift.Equatable {
+  public static func == (lhs: GamePaySDK.PhoneNumber, rhs: GamePaySDK.PhoneNumber) -> Swift.Bool
+}
+extension GamePaySDK.PhoneNumber : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
+}
+extension GamePaySDK.PhoneNumber {
+  public static func notPhoneNumber() -> GamePaySDK.PhoneNumber
+  public func notParsed() -> Swift.Bool
+  public var url: Foundation.URL? {
+    get
+  }
+}
+extension GamePaySDK.PhoneNumber {
+  @available(*, unavailable, message: "use PhoneNumberKit instead to produce PhoneNumbers")
+  public init(rawNumber: Swift.String) throws
+  @available(*, unavailable, message: "use PhoneNumberKit instead to produce PhoneNumbers")
+  public init(rawNumber: Swift.String, region: Swift.String) throws
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPBody2Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+public class TaxConfiguration {
+  public init(zip: Swift.String?, state: Swift.String?, taxId: Swift.String?)
+  @objc deinit
+}
+public struct PaymentResult {
+  public enum Status {
+    case completed
+    case pending
+    case canceled
+    case failed
+    public static func == (a: GamePaySDK.PaymentResult.Status, b: GamePaySDK.PaymentResult.Status) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public var status: GamePaySDK.PaymentResult.Status
+  public var payment: GamePaySDK.PaymentObject?
+  public var brickCharge: GamePaySDK.BrickCharge?
+  public var error: (any Swift.Error)?
+  public init(status: GamePaySDK.PaymentResult.Status)
+}
+public protocol ObjectScopeProtocol : AnyObject {
+  func makeStorage() -> any GamePaySDK.InstanceStorage
+}
+final public class ObjectScope : GamePaySDK.ObjectScopeProtocol, Swift.CustomStringConvertible, @unchecked Swift.Sendable {
+  final public let description: Swift.String
+  public init(storageFactory: @escaping () -> any GamePaySDK.InstanceStorage, description: Swift.String = "", parent: (any GamePaySDK.ObjectScopeProtocol)? = nil)
+  final public func makeStorage() -> any GamePaySDK.InstanceStorage
+  public static let transient: GamePaySDK.ObjectScope
+  public static let graph: GamePaySDK.ObjectScope
+  public static let container: GamePaySDK.ObjectScope
+  public static let weak: GamePaySDK.ObjectScope
+  @objc deinit
+}
+public struct GraphIdentifier : Swift.Identifiable {
+  public let id: Foundation.UUID
+  public typealias ID = Foundation.UUID
+}
+extension GamePaySDK.GraphIdentifier : Swift.Equatable, Swift.Hashable {
+  public static func == (a: GamePaySDK.GraphIdentifier, b: GamePaySDK.GraphIdentifier) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension UIKit.UIViewController {
+  @_Concurrency.MainActor @preconcurrency public func showDropDownMessage(title: Swift.String, message: Swift.String, type: GamePaySDK.DropDownMessageView.MessageType, theme: GamePaySDK.GPTheme, duration: Foundation.TimeInterval = 3.0, onTapMessage: (() -> Swift.Void)? = nil, onTapClose: (() -> Swift.Void)? = nil)
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class DropDownMessageView : UIKit.UIView {
+  public enum MessageType {
+    case info, success, warning, error
+    public static func == (a: GamePaySDK.DropDownMessageView.MessageType, b: GamePaySDK.DropDownMessageView.MessageType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public typealias Completion = (GamePaySDK.DropDownMessageView) -> Swift.Void
+  @objc deinit
+}
+extension GamePaySDK.Container {
+  final public func forward<T, S>(_ type: T.Type, name: Swift.String? = nil, to service: GamePaySDK.ServiceEntry<S>)
+}
+@objc @_Concurrency.MainActor @preconcurrency public class GPSecondaryButton : GamePaySDK.GPBaseButton {
+  @_Concurrency.MainActor @preconcurrency public var isOutlined: Swift.Bool {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency public init(theme: GamePaySDK.GPTheme)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol Assembly {
+  func assemble(container: GamePaySDK.Container)
+  func loaded(resolver: any GamePaySDK.Resolver)
+}
+extension GamePaySDK.Assembly {
+  public func loaded(resolver _: any GamePaySDK.Resolver)
+}
+@objc @_Concurrency.MainActor @preconcurrency public class GPPrimaryButton : GamePaySDK.GPBaseButton {
+  @_Concurrency.MainActor @preconcurrency public init(theme: GamePaySDK.GPTheme)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+extension UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public func addAndPinSubview(_ view: UIKit.UIView, insets: UIKit.NSDirectionalEdgeInsets = .zero)
+  @_Concurrency.MainActor @preconcurrency public func setSize(_ size: CoreFoundation.CGSize)
+  @_Concurrency.MainActor @preconcurrency public static func animateAlongsideKeyboard(_ notification: Foundation.Notification, animations: @escaping () -> Swift.Void)
+  @_Concurrency.MainActor @preconcurrency public func firstResponder() -> UIKit.UIView?
+  @_Concurrency.MainActor @preconcurrency public func setBorder(color: UIKit.UIColor, width: CoreFoundation.CGFloat, cornerRadius: CoreFoundation.CGFloat)
+}
+extension UIKit.UIColor {
+  convenience public init(hex: Swift.String)
+}
+public protocol BottomSheetContentViewController : UIKit.UIViewController {
+  var navigationBar: GamePaySDK.SheetNavigationBar { get }
+  var footerView: UIKit.UIView? { get }
+  var requiresFullScreen: Swift.Bool { get }
+  func didTapOrSwipeToDismiss()
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class BottomSheetViewController : UIKit.UIViewController, GamePaySDK.BottomSheetPresentable {
+  @_Concurrency.MainActor @preconcurrency public var contentOffsetPercentage: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency required public init(contentViewController: any GamePaySDK.BottomSheetContentViewController, theme: GamePaySDK.GPTheme)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func present(_ viewControllerToPresent: UIKit.UIViewController, animated flag: Swift.Bool, completion: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency public func setViewControllers(_ viewControllers: [any GamePaySDK.BottomSheetContentViewController])
+  @_Concurrency.MainActor @preconcurrency public func didTapOrSwipeToDismiss()
+  @objc deinit
+}
+extension GamePaySDK.BottomSheetViewController : UIKit.UIScrollViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+}
+extension GamePaySDK.BottomSheetViewController : UIKit.UIAdaptivePresentationControllerDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func presentationControllerShouldDismiss(_ presentationController: UIKit.UIPresentationController) -> Swift.Bool
+}
+extension GamePaySDK.BottomSheetViewController : UIKit.UIGestureRecognizerDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldReceive touch: UIKit.UITouch) -> Swift.Bool
+}
+public struct PayAltoMethodResponse : Swift.Codable {
+  public let id: Swift.String
+  public let name: Swift.String
+  public let imgUrl: Swift.String
+  public let psTypeId: Swift.Int
+  public let short: Swift.String?
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public protocol PaymentDelegate : AnyObject {
+  func handlePaymentResult(_ result: GamePaySDK.PaymentResult)
+}
+public protocol PaymentSheetDelegate : GamePaySDK.PaymentDelegate {
+  func handleChargeRequest(_ parameters: GamePaySDK.ChargeRequestParameters)
+}
+public struct ChargeRequestParameters {
+  public var cardToken: Swift.String
+  public var cardData: [Swift.String : Swift.String]
+  public var secureToken: Swift.String?
+  public var refID: Swift.String?
+  public var chargeId: Swift.String?
+  public var payment: GamePaySDK.PaymentObject
+  public let completionHandler: (Foundation.Data) -> Swift.Void
+}
+public struct BrickServerJWT : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
-extension GamePaySDK.BrickCard : Swift.Equatable {
-  public static func == (lhs: GamePaySDK.BrickCard, rhs: GamePaySDK.BrickCard) -> Swift.Bool
+extension GamePaySDK.PaymentSheet : CardinalMobile.CardinalValidationDelegate {
+  @objc dynamic public func cardinalSession(cardinalSession session: CardinalMobile.CardinalSession!, stepUpValidated validateResponse: CardinalMobile.CardinalResponse!, serverJWT: Swift.String!)
+}
+public enum GPThemeStore {
+  public static let defaultTheme: GamePaySDK.GPTheme
 }
 public struct BrickCharge : Swift.Codable {
   public enum Risk : Swift.String, Swift.Codable {
@@ -240,56 +734,219 @@ public struct BrickCharge : Swift.Codable {
   public let currency: Swift.String
   public let id: Swift.String
   public let card: GamePaySDK.BrickCard
-  public let risk: GamePaySDK.BrickCharge.Risk?
-  public init(from decoder: any Swift.Decoder) throws
-  public func encode(to encoder: any Swift.Encoder) throws
-}
-public struct BrickOTTResponse : Swift.Codable {
-  public let token: Swift.String
-  public var email: Swift.String?
-  public init(from decoder: any Swift.Decoder) throws
-  public func encode(to encoder: any Swift.Encoder) throws
-}
-@_hasMissingDesignatedInitializers public class BrickPaymentOption : GamePaySDK.PaymentOption {
-  public init()
-  @objc deinit
-}
-public struct PayAltoMethodResponse : Swift.Codable {
-  public let id: Swift.String
-  public let name: Swift.String
-  public let imgUrl: Swift.String
-  public let psTypeId: Swift.Int
-  public let short: Swift.String?
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
-@_hasMissingDesignatedInitializers public class PayAltoPaymentOption : GamePaySDK.PaymentOption {
-  public var psId: Swift.String
-  public var psTypeId: Swift.Int
-  public var short: Swift.String?
-  public var setting: GamePaySDK.PayAltoPaymentOption.Setting
-  public init()
-  public struct Setting {
-    public var widget: Swift.String
-    public var successUrl: Swift.String
-    public var clientUrl: Swift.String
-    public var countryCode: Swift.String?
-    public init()
+  public let riskRaw: Swift.String
+  public let refunded: Swift.Bool
+  public var risk: GamePaySDK.BrickCharge.Risk? {
+    get
   }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class PollingAnimatedProcessingView : UIKit.UIView {
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency final public class ErrorView : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public init(theme: GamePaySDK.GPTheme)
   @objc deinit
 }
-public struct PaymentObject {
-  public let itemID: Swift.String
-  public let userID: Swift.String
-  public let name: Swift.String
-  public let price: Swift.Double
-  public let currency: Swift.String
-  public var email: Swift.String?
-  public let image: UIKit.UIImage?
-  public init(itemID: Swift.String, userID: Swift.String, name: Swift.String, price: Swift.Double, currency: Swift.String, email: Swift.String? = nil, image: UIKit.UIImage? = nil)
+public protocol TextFieldFormatter {
+  func format(_ text: Swift.String) -> Swift.String
+  var maxLength: Swift.Int { get }
+  func unformatted(_ text: Swift.String) -> Swift.String
 }
-@_hasMissingDesignatedInitializers public class PaymentOption {
-  public func setKeys(projectKey: Swift.String? = nil, secretKey: Swift.String? = nil)
+public class ValidationRule {
+  public var field: any Swift.AnyObject & GamePaySDK.Validatable
+  public var errorLabel: UIKit.UILabel?
+  public var rules: [any GamePaySDK.Rule]
+  public init(field: any Swift.AnyObject & GamePaySDK.Validatable, rules: [any GamePaySDK.Rule], errorLabel: UIKit.UILabel?)
+  public func validateField() -> GamePaySDK.ValidationError?
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPDayTextField : GamePaySDK.GPFormTextField {
+  @_Concurrency.MainActor @preconcurrency public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+open class RegexRule : GamePaySDK.Rule {
+  public init(regex: Swift.String, message: Swift.String)
+  open func validate(_ value: Swift.String) -> Swift.Bool
+  open func errorMessage() -> Swift.String
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPHorizontalDropdownCell : GamePaySDK.GPBaseDropdownCell {
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPExpDateTextField : GamePaySDK.GPFormTextField {
+  @_Concurrency.MainActor @preconcurrency public var expMonth: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var expYear: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+public class FullNameRule : GamePaySDK.Rule {
+  public init(message: Swift.String = "Please provide a first & last name")
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+public class DoBRule : GamePaySDK.Rule {
+  public init(format: Swift.String, minimumAge: Swift.Int = 18)
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class CardholderNameRule : GamePaySDK.Rule {
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+public enum GPConstants {
+  public enum PaymentConfiguration {
+    public static let DEFAULT_PAYMENT_RESULT_LINK: Swift.String
+  }
+}
+@objc public class ValidationError : ObjectiveC.NSObject {
+  final public let field: any Swift.AnyObject & GamePaySDK.Validatable
+  public var errorLabel: UIKit.UILabel?
+  final public let errorMessage: Swift.String
+  public init(field: any Swift.AnyObject & GamePaySDK.Validatable, errorLabel: UIKit.UILabel?, error: Swift.String)
+  @objc deinit
+}
+public enum AppMessage {
+  public enum Validation {
+    public static let EmailEmpty: Swift.String
+    public static let EmailInvalidFormat: Swift.String
+    public static let CardNumberEmpty: Swift.String
+    public static let CardNumberInvalidFormat: Swift.String
+    public static let CardHolderNameEmpty: Swift.String
+    public static let CardHolderNameInvalid: Swift.String
+    public static let ExpityDateEmpty: Swift.String
+    public static let ExpiryDateInvalidFormat: Swift.String
+    public static let ExpiryDateExpired: Swift.String
+    public static let CVVEmpty: Swift.String
+    public static let CVVInvalidFormat: Swift.String
+  }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPHeading5Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPHeading2Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+extension GamePaySDK.ServiceEntry {
+  @discardableResult
+  final public func implements<T>(_ type: T.Type, name: Swift.String? = nil) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func implements<T1, T2>(_ type1: T1.Type, _ type2: T2.Type) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func implements<T1, T2, T3>(_ type1: T1.Type, _ type2: T2.Type, _ type3: T3.Type) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func implements<T1, T2, T3, T4>(_ type1: T1.Type, _ type2: T2.Type, _ type3: T3.Type, _ type4: T4.Type) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func implements<T1, T2, T3, T4, T5>(_ type1: T1.Type, _ type2: T2.Type, _ type3: T3.Type, _ type4: T4.Type, _ type5: T5.Type) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func implements<T1, T2, T3, T4, T5, T6>(_ type1: T1.Type, _ type2: T2.Type, _ type3: T3.Type, _ type4: T4.Type, _ type5: T5.Type, _ type6: T6.Type) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func implements<T1, T2, T3, T4, T5, T6, T7>(_ type1: T1.Type, _ type2: T2.Type, _ type3: T3.Type, _ type4: T4.Type, _ type5: T5.Type, _ type6: T6.Type, _ type7: T7.Type) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func implements<T1, T2, T3, T4, T5, T6, T7, T8>(_ type1: T1.Type, _ type2: T2.Type, _ type3: T3.Type, _ type4: T4.Type, _ type5: T5.Type, _ type6: T6.Type, _ type7: T7.Type, _ type8: T8.Type) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func implements<T1, T2, T3, T4, T5, T6, T7, T8, T9>(_ type1: T1.Type, _ type2: T2.Type, _ type3: T3.Type, _ type4: T4.Type, _ type5: T5.Type, _ type6: T6.Type, _ type7: T7.Type, _ type8: T8.Type, _ type9: T9.Type) -> GamePaySDK.ServiceEntry<Service>
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPButton1Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+public enum PhoneNumberDecodingStrategy {
+  case properties
+  case e164
+  public static var `default`: GamePaySDK.PhoneNumberDecodingStrategy
+  public static func == (a: GamePaySDK.PhoneNumberDecodingStrategy, b: GamePaySDK.PhoneNumberDecodingStrategy) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum PhoneNumberEncodingStrategy {
+  case properties
+  case e164
+  public static var `default`: GamePaySDK.PhoneNumberEncodingStrategy
+  public static func == (a: GamePaySDK.PhoneNumberEncodingStrategy, b: GamePaySDK.PhoneNumberEncodingStrategy) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum PhoneNumberDecodingUtils {
+  public static var defaultPhoneNumberKit: () -> GamePaySDK.PhoneNumberKit
+}
+public enum PhoneNumberEncodingUtils {
+  public static var defaultPhoneNumberKit: () -> GamePaySDK.PhoneNumberKit
+}
+extension Foundation.JSONDecoder {
+  public var phoneNumberDecodingStrategy: GamePaySDK.PhoneNumberDecodingStrategy {
+    get
+    set
+  }
+  public var phoneNumberKit: () -> GamePaySDK.PhoneNumberKit {
+    get
+    set
+  }
+}
+extension Foundation.JSONEncoder {
+  public var phoneNumberEncodingStrategy: GamePaySDK.PhoneNumberEncodingStrategy {
+    get
+    set
+  }
+  public var phoneNumberKit: () -> GamePaySDK.PhoneNumberKit {
+    get
+    set
+  }
+}
+extension GamePaySDK.PhoneNumber : Swift.Codable {
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public protocol Resolver {
+  func resolve<Service>(_ serviceType: Service.Type) -> Service?
+  func resolve<Service>(_ serviceType: Service.Type, name: Swift.String?) -> Service?
+  func resolve<Service, Arg1>(_ serviceType: Service.Type, argument: Arg1) -> Service?
+  func resolve<Service, Arg1>(_ serviceType: Service.Type, name: Swift.String?, argument: Arg1) -> Service?
+  func resolve<Service, Arg1, Arg2>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2) -> Service?
+  func resolve<Service, Arg1, Arg2>(_ serviceType: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3>(_ serviceType: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3, Arg4>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3, Arg4>(_ serviceType: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5>(_ serviceType: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6>(_ serviceType: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6, _ arg7: Arg7) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7>(_ serviceType: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6, _ arg7: Arg7) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6, _ arg7: Arg7, _ arg8: Arg8) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8>(_ serviceType: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6, _ arg7: Arg7, _ arg8: Arg8) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6, _ arg7: Arg7, _ arg8: Arg8, _ arg9: Arg9) -> Service?
+  func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9>(_ serviceType: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6, _ arg7: Arg7, _ arg8: Arg8, _ arg9: Arg9) -> Service?
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPBodyCompact1Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPBaseLabel : UIKit.UILabel {
+  @_Concurrency.MainActor @preconcurrency public init(theme: GamePaySDK.GPTheme)
+  @_Concurrency.MainActor @preconcurrency public func applyStyle()
   @objc deinit
 }
 public struct WidgetPayment : Swift.Decodable {
@@ -300,26 +957,364 @@ public struct WidgetPayment : Swift.Decodable {
   public let paymentSystem: Swift.String
   public init(from decoder: any Swift.Decoder) throws
 }
-@_spi(STP) @objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class DynamicHeightContainerView : UIKit.UIView {
-  @_spi(STP) @frozen public enum PinnedDirection {
-    @_spi(STP) case top, bottom
-    @_spi(STP) public static func == (a: GamePaySDK.DynamicHeightContainerView.PinnedDirection, b: GamePaySDK.DynamicHeightContainerView.PinnedDirection) -> Swift.Bool
-    @_spi(STP) public func hash(into hasher: inout Swift.Hasher)
-    @_spi(STP) public var hashValue: Swift.Int {
-      @_spi(STP) get
+extension GamePaySDK.MetadataTerritory {
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case codeID
+    case countryCode
+    case internationalPrefix
+    case mainCountryForCode
+    case nationalPrefix
+    case nationalPrefixFormattingRule
+    case nationalPrefixForParsing
+    case nationalPrefixTransformRule
+    case preferredExtnPrefix
+    case emergency
+    case fixedLine
+    case generalDesc
+    case mobile
+    case pager
+    case personalNumber
+    case premiumRate
+    case sharedCost
+    case tollFree
+    case voicemail
+    case voip
+    case uan
+    case numberFormats
+    case leadingDigits
+    case availableFormats
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
     }
   }
-  @_spi(STP) @_Concurrency.MainActor @preconcurrency required public init(pinnedDirection: GamePaySDK.DynamicHeightContainerView.PinnedDirection = .bottom)
-  @_spi(STP) @_Concurrency.MainActor @preconcurrency public func addPinnedSubview(_ view: UIKit.UIView)
-  @_spi(STP) @_Concurrency.MainActor @preconcurrency public func updateHeight()
-  @_spi(STP) @objc deinit
+  public init(from decoder: any Swift.Decoder) throws
 }
-public class PaymentSheet {
-  public var configuration: GamePaySDK.PaymentSheet.Configuration
-  public var payment: GamePaySDK.PaymentObject
-  required public init(payment: GamePaySDK.PaymentObject, configuration: GamePaySDK.PaymentSheet.Configuration)
-  public func present(from presentingViewController: UIKit.UIViewController, delegate: (any GamePaySDK.PaymentSheetDelegate)? = nil)
+extension GamePaySDK.MetadataPhoneNumberFormat {
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case pattern
+    case format
+    case intlFormat
+    case leadingDigitsPatterns
+    case nationalPrefixFormattingRule
+    case nationalPrefixOptionalWhenFormatting
+    case domesticCarrierCodeFormattingRule
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+@objc @_Concurrency.MainActor @preconcurrency open class GPFooter : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public init(logoImage: UIKit.UIImage, termsURL: Foundation.URL, privacyURL: Foundation.URL, theme: GamePaySDK.GPTheme)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
+}
+public enum PhoneNumberError : Swift.Error, Swift.Equatable {
+  case generalError
+  case invalidCountryCode
+  case invalidNumber
+  case tooLong
+  case tooShort
+  case deprecated
+  case metadataNotFound
+  case ambiguousNumber(phoneNumbers: Swift.Set<GamePaySDK.PhoneNumber>)
+  public static func == (a: GamePaySDK.PhoneNumberError, b: GamePaySDK.PhoneNumberError) -> Swift.Bool
+}
+extension GamePaySDK.PhoneNumberError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public enum PhoneNumberFormat {
+  case e164
+  case international
+  case national
+  public static func == (a: GamePaySDK.PhoneNumberFormat, b: GamePaySDK.PhoneNumberFormat) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum PhoneNumberType : Swift.String, Swift.Codable {
+  case fixedLine
+  case mobile
+  case fixedOrMobile
+  case pager
+  case personalNumber
+  case premiumRate
+  case sharedCost
+  case tollFree
+  case voicemail
+  case voip
+  case uan
+  case unknown
+  case notParsed
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum PossibleLengthType : Swift.String, Swift.Codable {
+  case national
+  case localOnly
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct PaymentObject {
+  public var itemID: Swift.String
+  public var userID: Swift.String
+  public var name: Swift.String
+  public var price: Swift.Double
+  public var currency: Swift.String
+  public var countryCode: Swift.String?
+  public var email: Swift.String?
+  public var taxConfiguration: GamePaySDK.TaxConfiguration?
+  public var customParams: [Swift.String : Any]
+  public init(itemID: Swift.String, userID: Swift.String, name: Swift.String, price: Swift.Double, currency: Swift.String, countryCode: Swift.String? = nil, email: Swift.String? = nil, taxConfiguration: GamePaySDK.TaxConfiguration? = nil, customParams: [Swift.String : Any] = [:])
+}
+public protocol InstanceStorage : AnyObject {
+  var instance: Any? { get set }
+  func graphResolutionCompleted()
+  func instance(inGraph graph: GamePaySDK.GraphIdentifier) -> Any?
+  func setInstance(_ instance: Any?, inGraph graph: GamePaySDK.GraphIdentifier)
+}
+extension GamePaySDK.InstanceStorage {
+  public func graphResolutionCompleted()
+  public func instance(inGraph _: GamePaySDK.GraphIdentifier) -> Any?
+  public func setInstance(_ instance: Any?, inGraph _: GamePaySDK.GraphIdentifier)
+}
+final public class GraphStorage : GamePaySDK.InstanceStorage {
+  final public var instance: Any?
+  public init()
+  final public func graphResolutionCompleted()
+  final public func instance(inGraph graph: GamePaySDK.GraphIdentifier) -> Any?
+  final public func setInstance(_ instance: Any?, inGraph graph: GamePaySDK.GraphIdentifier)
+  @objc deinit
+}
+final public class PermanentStorage : GamePaySDK.InstanceStorage {
+  final public var instance: Any?
+  public init()
+  @objc deinit
+}
+final public class TransientStorage : GamePaySDK.InstanceStorage {
+  final public var instance: Any? {
+    get
+    set
+  }
+  public init()
+  @objc deinit
+}
+final public class WeakStorage : GamePaySDK.InstanceStorage {
+  final public var instance: Any? {
+    get
+    set
+  }
+  public init()
+  @objc deinit
+}
+final public class CompositeStorage : GamePaySDK.InstanceStorage {
+  final public var instance: Any? {
+    get
+    set
+  }
+  public init(_ components: [any GamePaySDK.InstanceStorage])
+  final public func graphResolutionCompleted()
+  final public func setInstance(_ instance: Any?, inGraph graph: GamePaySDK.GraphIdentifier)
+  final public func instance(inGraph graph: GamePaySDK.GraphIdentifier) -> Any?
+  @objc deinit
+}
+extension GamePaySDK.Container {
+  @discardableResult
+  final public func register<Service, Arg1>(_ serviceType: Service.Type, name: Swift.String? = nil, factory: @escaping (any GamePaySDK.Resolver, Arg1) -> Service) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func register<Service, Arg1, Arg2>(_ serviceType: Service.Type, name: Swift.String? = nil, factory: @escaping (any GamePaySDK.Resolver, Arg1, Arg2) -> Service) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func register<Service, Arg1, Arg2, Arg3>(_ serviceType: Service.Type, name: Swift.String? = nil, factory: @escaping (any GamePaySDK.Resolver, Arg1, Arg2, Arg3) -> Service) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func register<Service, Arg1, Arg2, Arg3, Arg4>(_ serviceType: Service.Type, name: Swift.String? = nil, factory: @escaping (any GamePaySDK.Resolver, Arg1, Arg2, Arg3, Arg4) -> Service) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func register<Service, Arg1, Arg2, Arg3, Arg4, Arg5>(_ serviceType: Service.Type, name: Swift.String? = nil, factory: @escaping (any GamePaySDK.Resolver, Arg1, Arg2, Arg3, Arg4, Arg5) -> Service) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func register<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6>(_ serviceType: Service.Type, name: Swift.String? = nil, factory: @escaping (any GamePaySDK.Resolver, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6) -> Service) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func register<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7>(_ serviceType: Service.Type, name: Swift.String? = nil, factory: @escaping (any GamePaySDK.Resolver, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7) -> Service) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func register<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8>(_ serviceType: Service.Type, name: Swift.String? = nil, factory: @escaping (any GamePaySDK.Resolver, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8) -> Service) -> GamePaySDK.ServiceEntry<Service>
+  @discardableResult
+  final public func register<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9>(_ serviceType: Service.Type, name: Swift.String? = nil, factory: @escaping (any GamePaySDK.Resolver, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9) -> Service) -> GamePaySDK.ServiceEntry<Service>
+}
+extension GamePaySDK.Container {
+  final public func resolve<Service, Arg1>(_ serviceType: Service.Type, argument: Arg1) -> Service?
+  final public func resolve<Service, Arg1>(_: Service.Type, name: Swift.String?, argument: Arg1) -> Service?
+  final public func resolve<Service, Arg1, Arg2>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2) -> Service?
+  final public func resolve<Service, Arg1, Arg2>(_: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3>(_: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3, Arg4>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3, Arg4>(_: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5>(_: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6>(_: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6, _ arg7: Arg7) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7>(_: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6, _ arg7: Arg7) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6, _ arg7: Arg7, _ arg8: Arg8) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8>(_: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6, _ arg7: Arg7, _ arg8: Arg8) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9>(_ serviceType: Service.Type, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6, _ arg7: Arg7, _ arg8: Arg8, _ arg9: Arg9) -> Service?
+  final public func resolve<Service, Arg1, Arg2, Arg3, Arg4, Arg5, Arg6, Arg7, Arg8, Arg9>(_: Service.Type, name: Swift.String?, arguments arg1: Arg1, _ arg2: Arg2, _ arg3: Arg3, _ arg4: Arg4, _ arg5: Arg5, _ arg6: Arg6, _ arg7: Arg7, _ arg8: Arg8, _ arg9: Arg9) -> Service?
+}
+public protocol Behavior {
+  func container<Type, Service>(_ container: GamePaySDK.Container, didRegisterType type: Type.Type, toService entry: GamePaySDK.ServiceEntry<Service>, withName name: Swift.String?)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class GPPrimaryDestroyButton : GamePaySDK.GPPrimaryButton {
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol _Resolver {
+  func _resolve<Service, Arguments>(name: Swift.String?, option: (any GamePaySDK.ServiceKeyOption)?, invoker: @escaping ((Arguments) -> Any) -> Any) -> Service?
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency open class GPBaseButton : UIKit.UIView {
+  public enum State {
+    case active, loading, success, inactive
+    public static func == (a: GamePaySDK.GPBaseButton.State, b: GamePaySDK.GPBaseButton.State) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor @preconcurrency public func config(title: Swift.String? = nil, icon: UIKit.UIImage? = nil, onTap: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency public func setState(_ state: GamePaySDK.GPBaseButton.State)
+  @_Concurrency.MainActor @preconcurrency public func setTitle(_ title: Swift.String?)
+  @_Concurrency.MainActor @preconcurrency public func setIcon(_ icon: UIKit.UIImage?)
+  @objc deinit
+}
+extension UIKit.UIViewController {
+  @_Concurrency.MainActor @preconcurrency public var rootParent: UIKit.UIViewController {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public func animateHeightChange(forceAnimation: Swift.Bool = false, duration: CoreFoundation.CGFloat = 0.5, _ animations: (() -> Swift.Void)? = nil, postLayoutAnimations: (() -> Swift.Void)? = nil, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency public func presentAsBottomSheet(_ viewControllerToPresent: any GamePaySDK.BottomSheetPresentable, theme: GamePaySDK.GPTheme, completion: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor @preconcurrency public var bottomSheetController: GamePaySDK.BottomSheetViewController? {
+    get
+  }
+}
+extension Swift.String {
+  public func toDate(format: Swift.String, locale: Foundation.Locale = .current, timeZone: Foundation.TimeZone? = .current, calendar: Foundation.Calendar = Calendar(identifier: .gregorian)) -> Foundation.Date?
+}
+extension Foundation.Date {
+  public func get(_ components: Foundation.Calendar.Component..., calendar: Foundation.Calendar = Calendar.current) -> Foundation.DateComponents
+  public func get(_ component: Foundation.Calendar.Component, calendar: Foundation.Calendar = Calendar.current) -> Swift.Int
+}
+extension Foundation.URL {
+  public var queryParameters: [Swift.String : Swift.String]? {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers public class BottomSheetTransitioningDelegate : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension GamePaySDK.BottomSheetTransitioningDelegate : UIKit.UIViewControllerTransitioningDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func animationController(forPresented presented: UIKit.UIViewController, presenting: UIKit.UIViewController, source: UIKit.UIViewController) -> (any UIKit.UIViewControllerAnimatedTransitioning)?
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func animationController(forDismissed dismissed: UIKit.UIViewController) -> (any UIKit.UIViewControllerAnimatedTransitioning)?
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func presentationController(forPresented presented: UIKit.UIViewController, presenting: UIKit.UIViewController?, source: UIKit.UIViewController) -> UIKit.UIPresentationController?
+}
+public enum GPAssets : Swift.String {
+  public var image: UIKit.UIImage {
+    get
+  }
+  public var color: UIKit.UIColor {
+    get
+  }
+  case icCloseNavBar
+  case icArrowBack
+  case cardLogo
+  case icCardNumber
+  case icAddNewCard
+  case icRemoveSavedCard
+  case icScanCard
+  case icCVV
+  case icCheckboxSelected
+  case icCheckboxUnselected
+  case icLoading
+  case icMore
+  case icMoreVertical
+  case ic_success
+  case ic_declined
+  case ic_pw_logo
+  case logoFooter
+  case icCheckmark
+  case icError
+  case icDropdown
+  case icSearch
+  case icWarning
+  case icInfo
+  case icLoadingBig
+  case icPencil
+  case icGlobe
+  case icBlankCountry
+  case icWarningBig
+  case btnPaypal
+  case white000
+  case lavender050
+  case lavender100
+  case lavender200
+  case lavender300
+  case steelBlue300
+  case steelBlue500
+  case steelBlue800
+  case steelBlue900
+  case semanticBlue800
+  case semanticYellow800
+  case semanticRed800
+  case semanticGreen800
+  case backgroundBlue700
+  case backgroundYellow700
+  case backgroundRed700
+  case backgroundGreen700
+  case backgroundBlack900
+  case accentDarkBlue900
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension UIKit.UIStackView {
+  @_Concurrency.MainActor @preconcurrency public func removeAllSubviews()
+}
+@_hasMissingDesignatedInitializers public class PayAltoPaymentOption : GamePaySDK.PaymentOption {
+  @objc deinit
+}
+public protocol BottomSheetPresentable : UIKit.UIViewController {
+  func didTapOrSwipeToDismiss()
 }
 extension GamePaySDK.PaymentSheet {
   public struct Appearance : Swift.Equatable {
@@ -330,7 +1325,7 @@ extension GamePaySDK.PaymentSheet {
     public var primaryButton: GamePaySDK.PaymentSheet.Appearance.PrimaryButton
     public var cornerRadius: CoreFoundation.CGFloat
     public var borderWidth: CoreFoundation.CGFloat
-    public var selectedBorderWidth: CoreFoundation.CGFloat?
+    public var selectedBorderWidth: CoreFoundation.CGFloat
     public var shadow: GamePaySDK.PaymentSheet.Appearance.Shadow
     public var embeddedPaymentElement: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement
     @_spi(AppearanceAPIAdditionsPreview) public var sheetCornerRadius: CoreFoundation.CGFloat
@@ -412,11 +1407,11 @@ extension GamePaySDK.PaymentSheet.Appearance {
         case floatingButton
         case flatWithCheckmark
         public static func == (a: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style, b: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style) -> Swift.Bool
-        public func hash(into hasher: inout Swift.Hasher)
         public typealias AllCases = [GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style]
         nonisolated public static var allCases: [GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style] {
           get
         }
+        public func hash(into hasher: inout Swift.Hasher)
         public var hashValue: Swift.Int {
           get
         }
@@ -453,82 +1448,336 @@ extension GamePaySDK.PaymentSheet.Appearance {
     public static func == (a: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement, b: GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement) -> Swift.Bool
   }
 }
-extension GamePaySDK.PaymentSheet {
-  public class Configuration {
-    public var paymentOptions: [GamePaySDK.PaymentOption]
-    public var merchantDisplayName: Swift.String
-    public var merchantTermsOfServiceURL: Swift.String?
-    public var merchantPrivacyPolicyURL: Swift.String?
-    public var appearance: GamePaySDK.PaymentSheet.Appearance
-    public var style: GamePaySDK.PaymentSheet.UserInterfaceStyle {
-      get
-      set
+public struct BrickOTTResponse : Swift.Codable {
+  public let token: Swift.String
+  public var email: Swift.String?
+  public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPSearchTextField : GamePaySDK.GPFormTextField {
+  @_Concurrency.MainActor @preconcurrency public init(theme: GamePaySDK.GPTheme, onTextChange: @escaping (Swift.String) -> Swift.Void)
+  @objc deinit
+}
+@_spi(STP) @objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class DynamicHeightContainerView : UIKit.UIView {
+  @_spi(STP) @frozen public enum PinnedDirection {
+    @_spi(STP) case top, bottom
+    @_spi(STP) public static func == (a: GamePaySDK.DynamicHeightContainerView.PinnedDirection, b: GamePaySDK.DynamicHeightContainerView.PinnedDirection) -> Swift.Bool
+    @_spi(STP) public func hash(into hasher: inout Swift.Hasher)
+    @_spi(STP) public var hashValue: Swift.Int {
+      @_spi(STP) get
     }
-    public var environment: GamePaySDK.PaymentSheet.Environment
-    public var projectKey: Swift.String?
-    public var secretKey: Swift.String?
-    public init(paymentOptions: [GamePaySDK.PaymentOption])
-    public func setKeys(projectKey: Swift.String? = nil, secretKey: Swift.String? = nil)
-    @objc deinit
+  }
+  @_spi(STP) @_Concurrency.MainActor @preconcurrency required public init(pinnedDirection: GamePaySDK.DynamicHeightContainerView.PinnedDirection = .bottom)
+  @_spi(STP) @_Concurrency.MainActor @preconcurrency public func addPinnedSubview(_ view: UIKit.UIView)
+  @_spi(STP) @_Concurrency.MainActor @preconcurrency public func updateHeight()
+  @_spi(STP) @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPPayAltoPhoneTextField : GamePaySDK.GPPhoneTextField, GamePaySDK.FormElement {
+  @_Concurrency.MainActor @preconcurrency public var formKey: Swift.String
+  @_Concurrency.MainActor @preconcurrency public var formValue: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public init(formKey: Swift.String, defaultCountry: Swift.String? = nil, title: Swift.String, placeholder: Swift.String, presentingVC: UIKit.UIViewController, theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPBasePayAltoTextField : GamePaySDK.GPFormTextField, GamePaySDK.FormElement {
+  @_Concurrency.MainActor @preconcurrency public var formKey: Swift.String
+  @_Concurrency.MainActor @preconcurrency public var formValue: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public init(formKey: Swift.String, title: Swift.String, placeholder: Swift.String, theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPDropdownTextField<T> : GamePaySDK.GPFormTextField where T : GamePaySDK.GPBaseDropdownCell {
+  @_Concurrency.MainActor @preconcurrency public var selectedValue: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public init(options: [GamePaySDK.GPDropdownOption], title: Swift.String, dropdownTitle: Swift.String? = nil, placeholder: Swift.String, placeholderImage: UIKit.UIImage? = nil, hasSearchOption: Swift.Bool = false, presentingVC: UIKit.UIViewController, theme: GamePaySDK.GPTheme, onSelect: ((GamePaySDK.GPDropdownOption) -> Swift.Void)? = nil)
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPDoBTextField : GamePaySDK.GPBaseTextField {
+  @_Concurrency.MainActor @preconcurrency override public var validationText: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public init(dateFormat: Swift.String, presentingVC: UIKit.UIViewController, theme: GamePaySDK.GPTheme)
+  @_Concurrency.MainActor @preconcurrency override public func getChildViews() -> [UIKit.UIView]
+  @objc deinit
+}
+open class RequiredRule : GamePaySDK.Rule {
+  public init(message: Swift.String = "This field is required")
+  open func validate(_ value: Swift.String) -> Swift.Bool
+  open func errorMessage() -> Swift.String
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPIconTextDropdownCell : GamePaySDK.GPHorizontalDropdownCell {
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func prepareForReuse()
+  @_Concurrency.MainActor @preconcurrency override public func configureCell(with option: GamePaySDK.GPDropdownOption, isSelectedCell: Swift.Bool, placeholderImage: UIKit.UIImage? = nil, theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+public class MaxLengthRule : GamePaySDK.Rule {
+  public init()
+  public init(length: Swift.Int, message: Swift.String = "Must be at most %ld characters long")
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+@_inheritsConvenienceInitializers public class EmailRule : GamePaySDK.RegexRule {
+  override public init(regex: Swift.String, message: Swift.String)
+  @objc deinit
+}
+public class CustomCardNumberRule : GamePaySDK.Rule {
+  public init(checkEmpty: Swift.Bool = false)
+  public func validate(_ value: Swift.String) -> Swift.Bool
+  public func errorMessage() -> Swift.String
+  @objc deinit
+}
+extension Foundation.Bundle {
+  @_spi(STP) public class func stp_applicationName() -> Swift.String?
+  @_spi(STP) public class func stp_applicationVersion() -> Swift.String?
+  @_spi(STP) public class func stp_applicationBundleId() -> Swift.String?
+  @_spi(STP) public class func buildVersion() -> Swift.String?
+  @_spi(STP) public class var displayName: Swift.String? {
+    @_spi(STP) get
   }
 }
-extension GamePaySDK.PaymentSheet {
-  public enum Environment {
-    case staging, sandbox, production
-    public static func == (a: GamePaySDK.PaymentSheet.Environment, b: GamePaySDK.PaymentSheet.Environment) -> Swift.Bool
+public class Validator {
+  public var validations: GamePaySDK.ValidatorDictionary<GamePaySDK.ValidationRule>
+  public var errors: GamePaySDK.ValidatorDictionary<GamePaySDK.ValidationError>
+  public init()
+  public func validateField(_ field: any Swift.AnyObject & GamePaySDK.Validatable, callback: (_ error: GamePaySDK.ValidationError?) -> Swift.Void)
+  public func styleTransformers(success: ((_ validationRule: GamePaySDK.ValidationRule) -> Swift.Void)?, error: ((_ validationError: GamePaySDK.ValidationError) -> Swift.Void)?)
+  public func registerField(_ field: any Swift.AnyObject & GamePaySDK.Validatable, errorLabel: UIKit.UILabel? = nil, rules: [any GamePaySDK.Rule])
+  public func unregisterField(_ field: any Swift.AnyObject & GamePaySDK.Validatable)
+  public func validate(_ delegate: any GamePaySDK.ValidationDelegate)
+  public func validate(_ callback: (_ errors: [(any GamePaySDK.Validatable, GamePaySDK.ValidationError)]) -> Swift.Void)
+  @objc deinit
+}
+public protocol SheetNavigationBarDelegate : AnyObject {
+  func sheetNavigationBarDidClose(_ sheetNavigationBar: GamePaySDK.SheetNavigationBar)
+  func sheetNavigationBarDidBack(_ sheetNavigationBar: GamePaySDK.SheetNavigationBar)
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class SheetNavigationBar : UIKit.UIView {
+  public enum Style {
+    case close
+    case back
+    case none
+    public static func == (a: GamePaySDK.SheetNavigationBar.Style, b: GamePaySDK.SheetNavigationBar.Style) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
   }
+  @_Concurrency.MainActor @preconcurrency weak public var delegate: (any GamePaySDK.SheetNavigationBarDelegate)?
+  @_Concurrency.MainActor @preconcurrency public init(isTestMode: Swift.Bool = false, theme: GamePaySDK.GPTheme)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var intrinsicContentSize: CoreFoundation.CGSize {
+    @objc get
+  }
+  @_Concurrency.MainActor @preconcurrency public func setStyle(_ style: GamePaySDK.SheetNavigationBar.Style)
+  @objc deinit
 }
-extension GamePaySDK.PaymentSheet {
-  public enum UserInterfaceStyle : Swift.Int {
-    case automatic
-    case alwaysLight
-    case alwaysDark
-    public init?(rawValue: Swift.Int)
-    public typealias RawValue = Swift.Int
-    public var rawValue: Swift.Int {
-      get
-    }
+public typealias ValidatableField = Swift.AnyObject & GamePaySDK.Validatable
+public protocol Validatable {
+  var validationText: Swift.String { get }
+}
+extension UIKit.UITextField : GamePaySDK.Validatable {
+  @_Concurrency.MainActor @preconcurrency public var validationText: Swift.String {
+    get
   }
 }
-public protocol PaymentSheetDelegate : AnyObject {
-  func handlePaymentResult(_ result: GamePaySDK.PaymentSheetResult)
-  func handleChargeRequest(token: GamePaySDK.BrickOTTResponse, payment: GamePaySDK.PaymentObject, completionHandler: @escaping (Foundation.Data) -> Swift.Void)
-}
-public struct PaymentSheetResult {
-  public enum Status {
-    case completed
-    case pending
-    case canceled
-    case failed
-    public static func == (a: GamePaySDK.PaymentSheetResult.Status, b: GamePaySDK.PaymentSheetResult.Status) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
+extension UIKit.UITextView : GamePaySDK.Validatable {
+  @_Concurrency.MainActor @preconcurrency public var validationText: Swift.String {
+    get
   }
-  public var status: GamePaySDK.PaymentSheetResult.Status
-  public var payment: GamePaySDK.PaymentObject?
-  public var brickCharge: GamePaySDK.BrickCharge?
-  public var error: (any Swift.Error)?
-  public init(status: GamePaySDK.PaymentSheetResult.Status)
 }
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPLabel1Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+public typealias APICompletionHandler<T> = (Swift.Result<T, GamePaySDK.GPAPIClientError>) -> Swift.Void where T : Swift.Decodable
+public typealias HTTPHeaders = [Swift.String : Swift.String]
+public typealias Parameters = [Swift.String : Any]
+extension GamePaySDK.ObjectScope {
+  @available(*, unavailable, renamed: "transient")
+  public static let none: GamePaySDK.ObjectScope
+  @available(*, unavailable, renamed: "container")
+  public static let hierarchy: GamePaySDK.ObjectScope
+}
+@available(*, unavailable, renamed: "Resolver")
+public protocol ResolverType {
+}
+@available(*, unavailable, renamed: "Assembly")
+public protocol AssemblyType {
+}
+@available(*, unavailable, renamed: "ServiceKeyOption")
+public protocol ServiceKeyOptionType {
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPHeading3Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+public typealias MetadataCallback = () throws -> Foundation.Data?
+final public class PhoneNumberKit {
+  public init(metadataCallback: @escaping GamePaySDK.MetadataCallback = PhoneNumberKit.defaultMetadataCallback)
+  final public func parse(_ numberString: Swift.String, withRegion region: Swift.String = PhoneNumberKit.defaultRegionCode(), ignoreType: Swift.Bool = false) throws -> GamePaySDK.PhoneNumber
+  final public func parse(_ numberStrings: [Swift.String], withRegion region: Swift.String = PhoneNumberKit.defaultRegionCode(), ignoreType: Swift.Bool = false, shouldReturnFailedEmptyNumbers: Swift.Bool = false) -> [GamePaySDK.PhoneNumber]
+  final public func isValidPhoneNumber(_ numberString: Swift.String, withRegion region: Swift.String = PhoneNumberKit.defaultRegionCode(), ignoreType: Swift.Bool = false) -> Swift.Bool
+  final public func format(_ phoneNumber: GamePaySDK.PhoneNumber, toType formatType: GamePaySDK.PhoneNumberFormat, withPrefix prefix: Swift.Bool = true) -> Swift.String
+  final public func allCountries() -> [Swift.String]
+  final public func countries(withCode countryCode: Swift.UInt64) -> [Swift.String]?
+  final public func mainCountry(forCode countryCode: Swift.UInt64) -> Swift.String?
+  final public func countryCode(for country: Swift.String) -> Swift.UInt64?
+  final public func leadingDigits(for country: Swift.String) -> Swift.String?
+  final public func getRegionCode(of phoneNumber: GamePaySDK.PhoneNumber) -> Swift.String?
+  final public func getExampleNumber(forCountry countryCode: Swift.String, ofType type: GamePaySDK.PhoneNumberType = .mobile) -> GamePaySDK.PhoneNumber?
+  final public func getFormattedExampleNumber(forCountry countryCode: Swift.String, ofType type: GamePaySDK.PhoneNumberType = .mobile, withFormat format: GamePaySDK.PhoneNumberFormat = .international, withPrefix prefix: Swift.Bool = true) -> Swift.String?
+  final public func metadata(for country: Swift.String) -> GamePaySDK.MetadataTerritory?
+  final public func metadata(forCode countryCode: Swift.UInt64) -> [GamePaySDK.MetadataTerritory]?
+  final public func possiblePhoneNumberLengths(forCountry country: Swift.String, phoneNumberType: GamePaySDK.PhoneNumberType, lengthType: GamePaySDK.PossibleLengthType) -> [Swift.Int]
+  final public class func defaultRegionCode() -> Swift.String
+  public static func defaultMetadataCallback() throws -> Foundation.Data?
+  @objc deinit
+}
+extension GamePaySDK.PhoneNumberKit {
+  public enum CountryCodePicker {
+    public static var commonCountryCodes: [Swift.String]
+    public static var forceModalPresentation: Swift.Bool
+    public static var alwaysShowsSearchBar: Swift.Bool
+  }
+}
+public protocol ServiceKeyOption : Swift.CustomStringConvertible, Swift.Sendable {
+  func isEqualTo(_ another: any GamePaySDK.ServiceKeyOption) -> Swift.Bool
+  func hash(into: inout Swift.Hasher)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPButton2Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class ServiceEntry<Service> {
+  final public let serviceType: any Any.Type
+  final public let argumentsType: any Any.Type
+  @discardableResult
+  final public func inObjectScope(_ objectScope: any GamePaySDK.ObjectScopeProtocol) -> Self
+  @discardableResult
+  final public func inObjectScope(_ objectScope: GamePaySDK.ObjectScope) -> Self
+  @discardableResult
+  final public func initCompleted(_ completed: @escaping (any GamePaySDK.Resolver, Service) -> Swift.Void) -> Self
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPBodyMedium1Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class PartialFormatter {
+  convenience public init(phoneNumberKit: GamePaySDK.PhoneNumberKit = PhoneNumberKit(), defaultRegion: Swift.String = PhoneNumberKit.defaultRegionCode(), withPrefix: Swift.Bool = true, maxDigits: Swift.Int? = nil, ignoreIntlNumbers: Swift.Bool = false)
+  final public var defaultRegion: Swift.String {
+    get
+    set
+  }
+  final public var maxDigits: Swift.Int?
+  final public var currentRegion: Swift.String {
+    get
+  }
+  final public func nationalNumber(from rawNumber: Swift.String) -> Swift.String
+  final public func formatPartial(_ rawNumber: Swift.String) -> Swift.String
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class GPBody1Label : GamePaySDK.GPBaseLabel {
+  @_Concurrency.MainActor @preconcurrency override public func applyStyle()
+  @_Concurrency.MainActor @preconcurrency override public init(theme: GamePaySDK.GPTheme)
+  @objc deinit
+}
+public struct MetadataTerritory : Swift.Decodable {
+  public let codeID: Swift.String
+  public let countryCode: Swift.UInt64
+  public let internationalPrefix: Swift.String?
+  public let mainCountryForCode: Swift.Bool
+  public let nationalPrefix: Swift.String?
+  public let nationalPrefixFormattingRule: Swift.String?
+  public let nationalPrefixForParsing: Swift.String?
+  public let nationalPrefixTransformRule: Swift.String?
+  public let preferredExtnPrefix: Swift.String?
+  public let emergency: GamePaySDK.MetadataPhoneNumberDesc?
+  public let fixedLine: GamePaySDK.MetadataPhoneNumberDesc?
+  public let generalDesc: GamePaySDK.MetadataPhoneNumberDesc?
+  public let mobile: GamePaySDK.MetadataPhoneNumberDesc?
+  public let pager: GamePaySDK.MetadataPhoneNumberDesc?
+  public let personalNumber: GamePaySDK.MetadataPhoneNumberDesc?
+  public let premiumRate: GamePaySDK.MetadataPhoneNumberDesc?
+  public let sharedCost: GamePaySDK.MetadataPhoneNumberDesc?
+  public let tollFree: GamePaySDK.MetadataPhoneNumberDesc?
+  public let voicemail: GamePaySDK.MetadataPhoneNumberDesc?
+  public let voip: GamePaySDK.MetadataPhoneNumberDesc?
+  public let uan: GamePaySDK.MetadataPhoneNumberDesc?
+  public let numberFormats: [GamePaySDK.MetadataPhoneNumberFormat]
+  public let leadingDigits: Swift.String?
+}
+public struct MetadataPhoneNumberDesc : Swift.Decodable {
+  public let exampleNumber: Swift.String?
+  public let nationalNumberPattern: Swift.String?
+  public let possibleNumberPattern: Swift.String?
+  public let possibleLengths: GamePaySDK.MetadataPossibleLengths?
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct MetadataPossibleLengths : Swift.Decodable {
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct MetadataPhoneNumberFormat : Swift.Decodable {
+  public let pattern: Swift.String?
+  public let format: Swift.String?
+  public let intlFormat: Swift.String?
+  public let leadingDigitsPatterns: [Swift.String]?
+  public var nationalPrefixFormattingRule: Swift.String?
+  public let nationalPrefixOptionalWhenFormatting: Swift.Bool?
+  public let domesticCarrierCodeFormattingRule: Swift.String?
+}
+extension GamePaySDK.PayAltoInstructionAction : Swift.Equatable {}
+extension GamePaySDK.PayAltoInstructionAction : Swift.Hashable {}
+extension GamePaySDK.PayAltoInstructionAction : Swift.RawRepresentable {}
+extension GamePaySDK.PaymentSheet.Environment : Swift.Equatable {}
+extension GamePaySDK.PaymentSheet.Environment : Swift.Hashable {}
+extension GamePaySDK.PaymentSheet.Environment : Swift.RawRepresentable {}
+extension GamePaySDK.PaymentSheet.UserInterfaceStyle : Swift.Equatable {}
+extension GamePaySDK.PaymentSheet.UserInterfaceStyle : Swift.Hashable {}
+extension GamePaySDK.PaymentSheet.UserInterfaceStyle : Swift.RawRepresentable {}
+extension GamePaySDK.PaymentResult.Status : Swift.Equatable {}
+extension GamePaySDK.PaymentResult.Status : Swift.Hashable {}
+extension GamePaySDK.DropDownMessageView.MessageType : Swift.Equatable {}
+extension GamePaySDK.DropDownMessageView.MessageType : Swift.Hashable {}
 extension GamePaySDK.BrickCharge.Risk : Swift.Equatable {}
 extension GamePaySDK.BrickCharge.Risk : Swift.Hashable {}
 extension GamePaySDK.BrickCharge.Risk : Swift.RawRepresentable {}
+extension GamePaySDK.PhoneNumberDecodingStrategy : Swift.Equatable {}
+extension GamePaySDK.PhoneNumberDecodingStrategy : Swift.Hashable {}
+extension GamePaySDK.PhoneNumberEncodingStrategy : Swift.Equatable {}
+extension GamePaySDK.PhoneNumberEncodingStrategy : Swift.Hashable {}
+extension GamePaySDK.MetadataTerritory.CodingKeys : Swift.Equatable {}
+extension GamePaySDK.MetadataTerritory.CodingKeys : Swift.Hashable {}
+extension GamePaySDK.MetadataTerritory.CodingKeys : Swift.RawRepresentable {}
+extension GamePaySDK.MetadataPhoneNumberFormat.CodingKeys : Swift.Equatable {}
+extension GamePaySDK.MetadataPhoneNumberFormat.CodingKeys : Swift.Hashable {}
+extension GamePaySDK.MetadataPhoneNumberFormat.CodingKeys : Swift.RawRepresentable {}
+extension GamePaySDK.PhoneNumberFormat : Swift.Equatable {}
+extension GamePaySDK.PhoneNumberFormat : Swift.Hashable {}
+extension GamePaySDK.PhoneNumberType : Swift.Equatable {}
+extension GamePaySDK.PhoneNumberType : Swift.Hashable {}
+extension GamePaySDK.PhoneNumberType : Swift.RawRepresentable {}
+extension GamePaySDK.PossibleLengthType : Swift.Equatable {}
+extension GamePaySDK.PossibleLengthType : Swift.Hashable {}
+extension GamePaySDK.PossibleLengthType : Swift.RawRepresentable {}
+extension GamePaySDK.GPBaseButton.State : Swift.Equatable {}
+extension GamePaySDK.GPBaseButton.State : Swift.Hashable {}
+extension GamePaySDK.GPAssets : Swift.Equatable {}
+extension GamePaySDK.GPAssets : Swift.Hashable {}
+extension GamePaySDK.GPAssets : Swift.RawRepresentable {}
+extension GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style : Swift.Equatable {}
+extension GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style : Swift.Hashable {}
 @_spi(STP) extension GamePaySDK.DynamicHeightContainerView.PinnedDirection : Swift.Equatable {}
 @_spi(STP) extension GamePaySDK.DynamicHeightContainerView.PinnedDirection : Swift.Hashable {}
 @_spi(STP) extension GamePaySDK.DynamicHeightContainerView.PinnedDirection : Swift.Sendable {}
 @_spi(STP) extension GamePaySDK.DynamicHeightContainerView.PinnedDirection : Swift.BitwiseCopyable {}
-extension GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style : Swift.Equatable {}
-extension GamePaySDK.PaymentSheet.Appearance.EmbeddedPaymentElement.Row.Style : Swift.Hashable {}
-extension GamePaySDK.PaymentSheet.Environment : Swift.Equatable {}
-extension GamePaySDK.PaymentSheet.Environment : Swift.Hashable {}
-extension GamePaySDK.PaymentSheet.UserInterfaceStyle : Swift.Equatable {}
-extension GamePaySDK.PaymentSheet.UserInterfaceStyle : Swift.Hashable {}
-extension GamePaySDK.PaymentSheet.UserInterfaceStyle : Swift.RawRepresentable {}
-extension GamePaySDK.PaymentSheetResult.Status : Swift.Equatable {}
-extension GamePaySDK.PaymentSheetResult.Status : Swift.Hashable {}
+extension GamePaySDK.SheetNavigationBar.Style : Swift.Equatable {}
+extension GamePaySDK.SheetNavigationBar.Style : Swift.Hashable {}
