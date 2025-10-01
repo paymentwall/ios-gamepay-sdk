@@ -11,12 +11,19 @@ let package = Package(
         .library(
             name: "GamePaySDK",
             targets: ["GamePaySDK"]),
+        .library(
+            name: "CardinalMobile",
+            targets: ["CardinalMobile"]),
     ],
     dependencies: [],
     targets: [
         .binaryTarget(
             name: "GamePaySDK",
-            path: "GamePaySDK/GamePaySDK.zip"
-        )
+            path: "GamePaySDK/GamePaySDK.xcframework"
+        ),
+        .binaryTarget(
+            name: "CardinalMobile",
+            path: "Frameworks/CardinalMobile.xcframework"
+        ),
     ]
 )

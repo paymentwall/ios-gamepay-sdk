@@ -27,44 +27,28 @@ GamePay SDK is a global mobile payment gateway that accepts payments from more t
 XCode 16.0+, iOS 13.0+
 
 ## INSTALLATION
-You can integrate the SDK into your iOS app in three simple ways:
+You can integrate the SDK into your iOS app in two simple ways:
 ### Swift Package Manager:
 Location: https://github.com/paymentwall/ios-gamepay-sdk
-### Cocoapods:
-Add following line to your Pod.file:
-`pod 'GamePaySDK', :git => 'https://github.com/paymentwall/ios-gamepay-sdk', :tag => '<sdk_version>'`
+Ensure to add both `GamePaySDK` & `CardinalMobile` products to your Target
 ### Manually (Using Pre-built xcframework)
-1. Download xcframework file from github and move it to project folder
+1. Download xcframework files from github and move them to project folder
 2. Open Project settings → choose `General` tab → choose `Target` → Drag xcframework file into `Frameworks and Libraries` section → choose `Embed & sign`
-
+Ensure to add both `GamePaySDK` & `CardinalMobile` frameworks
 ## HOW TO RUN DEMO APP
 1. To run Demo app, you need to setup a project key. Obtain these Paymentwall API credentials in the application settings of your Merchant Account at [Paymentwall.com](http://paymentwall.com/)
-2. Start a demo merchant server
-    - Download and install Node.js from https://nodejs.org/en/download
-    - Open the `GamePayDemo/server` folder in your editor.
-    - Install the project dependencies by running: `npm install`
-    - Update secret key
-        ```nodejs
-        {
-            headers: {
-                'x-apikey': 'your-project-secret-key',
-            }
-        }
-        ```
-    - Start server: `node server.js`
-3. Open `GamePayDemo/GamePayDemo.xcodeproj` in Xcode
-4. Modify the project and secret keys, for instance:
+2. Open `GamePayDemo/GamePayDemo.xcodeproj` in Xcode
+3. Modify the project and secret keys, for instance:
     ```swift
-    brickOption.setKeys(projectKey: "your-project-key", secretKey: "your-project-secret-key")
+    configuration.setKeys(projectKey: projectKey, secretKey: secretKey)
     ```
-5. Select `GamePayDemo` scheme then run
+4. Select `GamePayDemo` scheme then run
 
 ## LATEST UPDATE
 Please check the demo app and the docs to see how to update your current code. You can check what's new on the [Release section](https://github.com/paymentwall/ios-gamepay-sdk/releases).
-
 
 ## CREDENTIALS
 SDK integration requires a project key. Obtain these Paymentwall API credentials in the application settings of your Merchant Account at [Paymentwall.com](http://paymentwall.com/)
 
 ## Core SDK integration
-For additional information, please refer to the documentation. [GamePay iOS Core SDK integration instruction](https://docs.terminal3.com/)
+For additional information, please refer to the documentation. [GamePay iOS Core SDK integration instruction](https://docs.terminal3.com/integration/sdks/game-pay-ios)
