@@ -26,43 +26,43 @@
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		LS8y8b5QAAuGX50FJjoL2AtpUoU=
+		Sw0Wc0TR4N1rQqBgeZbCpBMqJtU=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		JIX+XCGXQgLHzS+aAbyc0bM3NXk=
+		IGO1e2QJ6tOoidCPVbS3CgKjusA=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		Ewy7Lpbmr3CV6fV9m6EPw62fDKc=
+		9tIfWL4LQtugVtfOSXu9vJZCq2g=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		sCl1syld4bF9uJCU+kDOnUjV8kc=
+		ir1IiS217Dqnmr8iCcMijTmO5Bk=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		BtTC5Bcmn2Wk5sSp1HncoZ3opAY=
+		TLJjEByxUbHNULFYgpdTABxXiq4=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		LS8y8b5QAAuGX50FJjoL2AtpUoU=
+		Sw0Wc0TR4N1rQqBgeZbCpBMqJtU=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		o8+n8FC1uHzeUYgQZTC4FrkdUto=
+		/WGrlJBmLErAJ6GFjBjfy7JX0Ok=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		FSx2D8VQJ0rE8q3e6Ev8n6Tg4lQ=
+		Z11tih4heboFf5zXQrWTel72uJ4=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		QGcjwVuFhDiPzIucy4FDnLleBik=
+		k6eYRORShldZVMAcUK1OQR8V3fc=
 		</data>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		NSXw1Uf01RsXb1fmxcn8RGqYg18=
+		gioxsA8Pf0G07tSq2fRfzfD+xz8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -131,70 +131,70 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			I0bkbE9VhhDEhMQn0ZEUAx993nYGrsciAitACFLO+lw=
+			YJsmRjmuV+9y1RL2vTW+qHbXDPj6vYtJqi0rcm+q608=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			SCIUTKW2Saq49AWqJtBJseHQtZ0nE1KwQiDnU3bctiI=
+			Ookd5s0M1D79O4JMYTL17caA3X4v/PW4BfuoedtcKg8=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			kUa6piOXERBAsOLp14g+qviMgoXchtJUaHEhf3FVicI=
+			Qlfy7GT0TmaYFgNrJaX3PMOikzqF+rJhS+lELcW+HHU=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			tzjsHDCL81qbuIDVn73QWF6FqVlZMxIoiXT+Y6RW8fs=
+			hr0cAB1EQqX8lxex9x7vB98gKsUtYU5XRWmDHbKZB/o=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			qIHaRkmS4m/cO/JxYRioJgb3KRXm39dqrpjxvRpqsNM=
+			zgRgDrXxLBf0vWauU20Qab2IBCoqk8faKACV1FrqsiA=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			I0bkbE9VhhDEhMQn0ZEUAx993nYGrsciAitACFLO+lw=
+			YJsmRjmuV+9y1RL2vTW+qHbXDPj6vYtJqi0rcm+q608=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			LgI4PnNEjucfMf0CmnlvfVXKbsTRSaYv4QFk6hLgQ/M=
+			EI7K+FMR10jeSG3J1Yn5LmqGQzsew8XC+/nciyWAa+0=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			MVRjOSkBu1hZBGM4n1OXg8RLGKQH+/L2XwMbSj21iYQ=
+			RVeyOfmg8hFGUPcVtRIaIc3x02YTp8hKKGmFc16QN3M=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			s6D38Kmljk2KwGiOd6LZEVZorJn7lSLrZfidSRgNZcg=
+			TB6FDlNJem/iF7zIofefZCyuRoDmE/HnGjtXrjKXp0s=
 			</data>
 		</dict>
 		<key>Modules/GamePaySDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			8ezAXvUJQ3rFzo6fcvMNsFi8YxFFcFV4PmvVMF+1F/Q=
+			uEAm1IH4JLW4YV4uxQpssb/1END8098LashX/kemQtU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
